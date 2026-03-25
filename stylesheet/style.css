@@ -1335,6 +1335,13 @@ html {
     padding: 0 20px;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter button:hover {
+    background: #b8941f;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .footer-bottom {
