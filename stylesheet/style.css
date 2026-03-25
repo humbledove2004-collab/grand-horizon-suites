@@ -1112,6 +1112,8 @@ html {
     gap: 6px;
 }
 
+@media (max-width: 480px) {
+    .gallery-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: 250px;
     }

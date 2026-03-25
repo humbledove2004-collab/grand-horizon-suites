@@ -77,10 +77,10 @@
       window.GH.openModal(document.getElementById("bookingModal"));
     }
 
-    const contactLink = e.target.closest('.nav-menu a[href="#contact"]');
+    const contactLink = e.target.closest('.nav-menu a[href="#contact"], .footer .email-link');
     if (contactLink) {
       e.preventDefault();
-      window.GH.openModal(document.getElementById("bookingModal"));
+      window.GH.openBookingWithContext("General Inquiry / Message");
     }
 
     const bookFromDetails = e.target.closest('#bookFromDetails');
