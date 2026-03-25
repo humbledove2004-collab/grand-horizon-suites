@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore exclusive special offers at Grand Horizon Suites. Tailored packages for honeymoons, extended stays, and weekend city escapes.">
+    <meta name="keywords" content="special offers, honeymoon packages, extended stay discount, weekend getaway, Accra hotel deals">
+    <title>Special Offers | Grand Horizon Suites</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="stylesheet" href="../stylesheet/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="Grand Horizon Suites">
+                <img src="../images/logo.svg" alt="Grand Horizon Suites logo" class="site-logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#rooms">Rooms</a></li>
+                <li><a href="dining.html">Dining</a></li>
+                <li><a href="spa.html">Spa</a></li>
+                <li><a href="offers.html" class="active">Offers</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><button class="btn-book" id="openBooking">Book Now</button></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="hero secondary-hero" style="background-image: url('../images/special%20Bg.png');">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Special Offers</h1>
+                    <p class="hero-subtitle">Exclusive experiences tailored just for you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Content -->
+    <section class="offers-details" style="padding: 80px 0;">
+        <div class="container">
+            <div class="features-grid" data-view="default">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Honeymoon.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Honeymoon Bliss</h3>
+                        <p>Celebrate your new chapter with an unforgettable romantic escape. Our Honeymoon Bliss package is designed to create lasting memories in the most luxurious setting.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-gift" style="color: var(--secondary); margin-right: 10px;"></i> Champagne & Flowers on Arrival</li>
+                            <li><i class="fas fa-utensils" style="color: var(--secondary); margin-right: 10px;"></i> Private 3-course Dinner</li>
+                        </ul>
+                        <a href="offers.html?view=honeymoon" class="btn-primary">View Options</a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/long-stay-package_920x638.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Stay Longer, Save More</h3>
+                        <p>Immerse yourself in luxury for longer. Book a stay of 5 nights or more and enjoy exclusive discounts along with premium perks throughout your visit.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-percentage" style="color: var(--secondary); margin-right: 10px;"></i> 20% Off Room Rate</li>
+                            <li><i class="fas fa-coffee" style="color: var(--secondary); margin-right: 10px;"></i> Daily Complimentary Breakfast</li>
+                        </ul>
+                        <a href="offers.html?view=staylonger" class="btn-primary">View Options</a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G3.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Weekend City Escape</h3>
+                        <p>Recharge with a quick weekend getaway. Perfect for those looking to experience the best of Accra's coastal charm without a long commitment.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Late Check-out until 4:00 PM</li>
+                            <li><i class="fas fa-car" style="color: var(--secondary); margin-right: 10px;"></i> Complimentary Airport Transfer</li>
+                        </ul>
+                        <a href="offers.html?view=weekend" class="btn-primary">View Options</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Honeymoon Options -->
+            <div class="features-grid" data-view="honeymoon">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Romantic.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Romantic Sunset Retreat</h3>
+                        <p>Experience pure romance with a sunset cruise followed by a private dinner on the beach under the stars.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-ship" style="color: var(--secondary); margin-right: 10px;"></i> 2-Hour Private Sunset Cruise</li>
+                            <li><i class="fas fa-moon" style="color: var(--secondary); margin-right: 10px;"></i> Candlelit Beach Dinner</li>
+                        </ul>
+                        <button class="btn-primary">Claim Sunset Retreat</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Ultimate.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Ultimate Luxury Honeymoon</h3>
+                        <p>The pinnacle of romantic luxury. Includes a guaranteed upgrade to our Presidential Villa and daily couples' spa treatments.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Villa Upgrade & Private Butler</li>
+                            <li><i class="fas fa-spa" style="color: var(--secondary); margin-right: 10px;"></i> Daily 60-min Couples Massage</li>
+                        </ul>
+                        <button class="btn-primary">Claim Ultimate Luxury</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stay Longer Options -->
+            <div class="features-grid" data-view="staylonger">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G5.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Extended Escape (5+ Nights)</h3>
+                        <p>Take your time to explore Accra. Stay 5 nights or more and enjoy significant savings and daily perks.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-tag" style="color: var(--secondary); margin-right: 10px;"></i> 15% Off Best Available Rate</li>
+                            <li><i class="fas fa-tshirt" style="color: var(--secondary); margin-right: 10px;"></i> Complimentary Laundry Service</li>
+                        </ul>
+                        <button class="btn-primary">Claim Extended Escape</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G1.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Long-Term Luxury (10+ Nights)</h3>
+                        <p>Make Grand Horizon your second home. Our best value for long-term stays with premium concierge services.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-percent" style="color: var(--secondary); margin-right: 10px;"></i> 25% Off Best Available Rate</li>
+                            <li><i class="fas fa-car-side" style="color: var(--secondary); margin-right: 10px;"></i> Private Chauffeur for City Tours</li>
+                        </ul>
+                        <button class="btn-primary">Claim Long-Term Luxury</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekend Options -->
+            <div class="features-grid" data-view="weekend">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/coastal.webp');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Coastal Weekend Break</h3>
+                        <p>Rejuvenate by the sea with guided beach tours and fresh seafood experiences.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-umbrella-beach" style="color: var(--secondary); margin-right: 10px;"></i> Guided Coastal Discovery Tour</li>
+                            <li><i class="fas fa-fish" style="color: var(--secondary); margin-right: 10px;"></i> 3-Course Seafood Lunch</li>
+                        </ul>
+                        <button class="btn-primary">Claim Coastal Weekend</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/city%20culture.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>City Culture Weekend</h3>
+                        <p>Dive into the vibrant culture of Accra with museum visits and exclusive jazz club access.</p>
+                        <ul style="list-style: none; margin-bottom: 20px; color: var(--gray);">
+                            <li><i class="fas fa-museum" style="color: var(--secondary); margin-right: 10px;"></i> VIP Museum & Gallery Passes</li>
+                            <li><i class="fas fa-music" style="color: var(--secondary); margin-right: 10px;"></i> Reserved Table at Sky Bar Jazz Night</li>
+                        </ul>
+                        <button class="btn-primary">Claim City Culture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Grand Horizon Suites</h3>
+                    <p>Talented-Royals Academy</p>
+                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856" target="_blank" rel="noopener">+233 53 210 2856</a></p>
+                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link" href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html#rooms">Rooms & Suites</a></li>
+                        <li><a href="dining.html">Restaurants</a></li>
+                        <li><a href="spa.html">Spa & Wellness</a></li>
+                        <li><a href="offers.html">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer" aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://www.instagram.com/dadaba_ice_age" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <button id="newsletter-submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Grand Horizon Suites. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle">Book a Room / Contact Us</h3>
+                <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
+            </div>
+            <form id="bookingForm">
+                <input name="name" placeholder="Full name" required>
+                <input name="email" type="email" placeholder="Email address" required>
+                <input name="phone" placeholder="Phone" class="full">
+                <input name="checkin" type="date" placeholder="Check-in">
+                <input name="checkout" type="date" placeholder="Check-out">
+                <select name="guests">
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
+                </select>
+                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
+                <button type="submit">Request Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="../javascript/supabase-config.js"></script>
+    <script src="../javascript/contact-service.js"></script>
+    <script src="../javascript/ui-core.js"></script>
+    <script src="../javascript/modals.js"></script>
+    <script src="../javascript/booking.js"></script>
+    <script src="../javascript/views.js"></script>
+</body>
+
+</html>

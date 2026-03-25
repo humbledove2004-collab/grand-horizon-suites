@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience refined luxury and contemporary elegance at Grand Horizon Suites, Accra's premier coastal hotel.">
+    <meta name="keywords" content="luxury hotel, Accra, coastal suites, fine dining, spa, wellness, vacation, Ghana">
+    <title>Grand Horizon Suites | Luxury Hotel</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Hotel",
+      "name": "Grand Horizon Suites",
+      "description": "Experience refined luxury and contemporary elegance at Grand Horizon Suites, Accra's premier coastal hotel.",
+      "image": "https://grandhorizonsuites.com/images/background.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Talented-Royals Academy",
+        "addressLocality": "Accra",
+        "addressRegion": "Greater Accra",
+        "addressCountry": "GH"
+      },
+      "telephone": "+233532102856",
+      "priceRange": "$$$",
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Sea View", "value": "true" },
+        { "@type": "LocationFeatureSpecification", "name": "Spa", "value": "true" },
+        { "@type": "LocationFeatureSpecification", "name": "Infinity Pool", "value": "true" }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="../stylesheet/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo" aria-label="Grand Horizon Suites">
+                <img src="../images/logo.svg" alt="Grand Horizon Suites logo" class="site-logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="dining.html">Dining</a></li>
+                <li><a href="spa.html">Spa</a></li>
+                <li><a href="offers.html">Offers</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><button class="btn-book" id="openBooking">Book Now</button></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Where Refined Luxury Meets Accra’s Coastal Charm</h1>
+                    <p class="hero-subtitle">Experience refined coastal hospitality and contemporary elegance in the
+                        heart of Accra.</p>
+                    <div class="hero-ctas">
+                        <button class="btn-primary" id="openBookingHero">Book Now</button>
+                        <a class="btn-secondary" href="#rooms">View Rooms</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section class="dining-section" id="dining">
+        <div class="container">
+            <h2 class="section-title">Exquisite Dining</h2>
+            <p class="section-subtitle">Savor culinary masterpieces in our world-class restaurants</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/bar%201.png');"></div>
+                    <div class="feature-content">
+                        <h3>The Grand Hall</h3>
+                        <p>Fine Dining & International Cuisine</p>
+                        <a href="dining.html?view=grand" class="btn-text explore-btn">Explore Menu <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Oceanbreeze.jpg');"></div>
+                    <div class="feature-content">
+                        <h3>Ocean Breeze Terrace</h3>
+                        <p>Al Fresco Dining & Cocktails</p>
+                        <a href="dining.html?view=ocean" class="btn-text explore-btn">Explore Menu <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Preview -->
+    <section class="rooms-preview" id="rooms">
+        <div class="container">
+            <h2 class="section-title">Our Luxurious Rooms</h2>
+            <p class="section-subtitle">Each suite offers breathtaking views of the Hotel</p>
+
+            <div class="rooms-grid">
+                <!-- Room 1 -->
+                <div class="room-card" data-title="Aegean View Suite"
+                    data-desc="Private balcony with panoramic sea view, king bed, and jacuzzi." data-price="$499/night"
+                    data-images="../images/A1.jpg,../images/A2.jpg,../images/A3.jpg"
+                    data-amenities="WiFi,Jacuzzi,Sea View">
+                    <div class="room-image" style="background-image: url('../images/A1.jpg');" loading="lazy">
+                        <span class="room-price">$499<span>/night</span></span>
+                    </div>
+                    <div class="room-info">
+                        <h3>Aegean View Suite</h3>
+                        <p class="room-desc">Private balcony with panoramic sea view, king bed, and jacuzzi.</p>
+                        <div class="room-amenities">
+                            <span><i class="fas fa-wifi"></i> WiFi</span>
+                            <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
+                            <span><i class="fas fa-umbrella-beach"></i> Sea View</span>
+                        </div>
+                        <button class="btn-secondary view-details">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Room 2 -->
+                <div class="room-card" data-title="Infinity Pool Suite"
+                    data-desc="Private infinity pool overlooking the volcano, luxury bathroom." data-price="$799/night"
+                    data-images="../images/I-1.jpg,../images/I-2.jpeg,../images/I-3.jpg"
+                    data-amenities="Private Pool,Minibar,24/7 Butler">
+                    <div class="room-image" style="background-image: url('../images/I-1.jpg');" loading="lazy">
+                        <span class="room-price">$799<span>/night</span></span>
+                    </div>
+                    <div class="room-info">
+                        <h3>Infinity Pool Suite</h3>
+                        <p class="room-desc">Private infinity pool overlooking the volcano, luxury bathroom.</p>
+                        <div class="room-amenities">
+                            <span><i class="fas fa-swimming-pool"></i> Private Pool</span>
+                            <span><i class="fas fa-wine-glass-alt"></i> Minibar</span>
+                            <span><i class="fas fa-concierge-bell"></i> 24/7 Butler</span>
+                        </div>
+                        <button class="btn-secondary view-details">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="room-card" data-title="Presidential Villa"
+                    data-desc="Two bedrooms, private terrace, personal chef available." data-price="$1299/night"
+                    data-images="../images/P1.jpg,../images/P2.jpg,../images/P3.jpg"
+                    data-amenities="Chef Service,Private Transfer,Spa Access">
+                    <div class="room-image"
+                        style="background-image: url('../images/P1.jpg');" loading="lazy">
+                        <span class="room-price">$1299<span>/night</span></span>
+                    </div>
+                    <div class="room-info">
+                        <h3>Presidential Villa</h3>
+                        <p class="room-desc">Two bedrooms, private terrace, personal chef available.</p>
+                        <div class="room-amenities">
+                            <span><i class="fas fa-utensils"></i> Chef Service</span>
+                            <span><i class="fas fa-car"></i> Private Transfer</span>
+                            <span><i class="fas fa-spa"></i> Spa Access</span>
+                        </div>
+                        <button class="btn-secondary view-details">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Local Image Gallery (uses images/ folder) -->
+            <div class="gallery" id="gallery">
+                <h3 class="section-title">Visual Stories</h3>
+                <p class="section-subtitle">Experience the Art of Living</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item large">
+                        <img src="../images/G1.jpg" alt="Luxury Suite View" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Luxury Living</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/G2.jpg" alt="Spa Treatment Room" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Wellness Oasis</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item tall">
+                        <img src="../images/G3.jpg" alt="Fine Dining Experience" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Culinary Excellence</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/G4.jpg" alt="Hotel Exterior Night" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Iconic Architecture</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item wide">
+                        <img src="../images/G5.jpg" alt="Poolside Relaxation" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Serene Moments</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/G6.png" alt="Grand Lobby Area" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>The Grand Entrance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spa & Wellness Section -->
+    <section class="spa-section" id="spa">
+        <div class="container">
+            <h2 class="section-title">Spa & Wellness</h2>
+            <p class="section-subtitle">Rejuvenate your body and mind in our sanctuary of peace</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/S1.png');"></div>
+                    <div class="feature-content">
+                        <h3>Serenity Spa</h3>
+                        <p>Holistic Treatments & Massage</p>
+                        <a href="spa.html?view=serenity" class="btn-text explore-btn">View Treatments <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/f1.png');"></div>
+                    <div class="feature-content">
+                        <h3>Wellness Center</h3>
+                        <p>Fitness & Yoga</p>
+                        <a href="spa.html?view=wellness" class="btn-text explore-btn">View Facilities <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section class="offers-section" id="offers">
+        <div class="container">
+            <h2 class="section-title">Special Offers</h2>
+            <p class="section-subtitle">Exclusive packages designed for your perfect stay</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Honeymoon.jpg');"></div>
+                    <div class="feature-content">
+                        <h3>Honeymoon Bliss</h3>
+                        <p>Romantic Getaway Package</p>
+                        <a href="offers.html?view=honeymoon" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/long-stay-package_920x638.jpg');"></div>
+                    <div class="feature-content">
+                        <h3>Stay Longer, Save More</h3>
+                        <p>Extended Stay Discount</p>
+                        <a href="offers.html?view=staylonger" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G3.jpg');"></div>
+                    <div class="feature-content">
+                        <h3>Weekend City Escape</h3>
+                        <p>Short Break Specials</p>
+                        <a href="offers.html?view=weekend" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready for an Unforgettable Experience?</h2>
+            <p>Contact our concierge to plan your perfect getaway</p>
+            <div class="cta-buttons">
+                <button class="btn-primary" id="openBookingCTA">Book Now</button>
+                <button class="btn-secondary" id="openContactCTA">Contact Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="container">
+            <h2 class="section-title">Our Location</h2>
+            <p class="section-subtitle">Find us in the heart of Accra's coastal district</p>
+            <div class="location-container">
+                <div id="map" style="height: 450px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></div>
+                <div class="map-controls">
+                    <button id="trackLocation" class="btn-primary">
+                        <i class="fas fa-location-arrow"></i> Show My Real-Time Location
+                    </button>
+                    <p id="locationStatus" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Grand Horizon Suites</h3>
+                    <p><a href="#location" class="footer-location-link"><i class="fas fa-map-marker-alt"></i> Talented-Royals Academy</a></p>
+                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856" target="_blank" rel="noopener">+233 53 210 2856</a></p>
+                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link" href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#rooms">Rooms & Suites</a></li>
+                        <li><a href="dining.html">Restaurants</a></li>
+                        <li><a href="spa.html">Spa & Wellness</a></li>
+                        <li><a href="offers.html">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer" aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://www.instagram.com/Dadaba_ice_age" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <button id="newsletter-submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Grand Horizon Suites. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle">Book a Room / Contact Us</h3>
+                <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
+            </div>
+            <form id="bookingForm">
+                <input name="name" placeholder="Full name" required>
+                <input name="email" type="email" placeholder="Email address" required>
+                <input name="phone" placeholder="Phone" class="full">
+                <input name="checkin" type="date" placeholder="Check-in">
+                <input name="checkout" type="date" placeholder="Check-out">
+                <select name="guests">
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
+                </select>
+                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
+                <button type="submit">Request Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Room Details Modal -->
+    <div class="modal" id="roomModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="roomModalTitle">
+            <div class="modal-header">
+                <h3 id="roomModalTitle">Room Details</h3>
+                <button class="modal-close" id="closeRoomModal" aria-label="Close">✕</button>
+            </div>
+            <div class="room-modal-body">
+                <div class="room-modal-grid">
+                    <div class="room-carousel">
+                        <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous image">‹</button>
+                        <div class="room-modal-image" id="roomImage"
+                            style="background-size:cover;background-position:center;height:320px;border-radius:8px;margin:0 12px;">
+                        </div>
+                        <button class="carousel-nav next" id="carouselNext" aria-label="Next image">›</button>
+                        <div class="room-thumbnails" id="roomThumbnails" aria-hidden="false"></div>
+                    </div>
+                    <div class="room-modal-info">
+                        <h4 id="roomTitle"></h4>
+                        <p id="roomPrice" style="font-weight:700;color:var(--secondary);"></p>
+                        <p id="roomDesc"></p>
+                        <div id="roomAmenities" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+                        <div style="margin-top:14px;text-align:right;">
+                            <button class="btn-primary" id="bookFromDetails">Book This Room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for enlarged image -->
+    <div id="imageLightbox" class="image-lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+        <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous">‹</button>
+        <img id="lightboxImage" src="" alt="Enlarged image" />
+        <button class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
+    </div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<!-- Supabase Configuration -->
+<script src="../javascript/supabase-config.js"></script>
+
+<!-- Contact Service -->
+<script src="../javascript/contact-service.js"></script>
+
+<!-- Modular Scripts -->
+<script src="../javascript/ui-core.js"></script>
+<script src="../javascript/modals.js"></script>
+<script src="../javascript/gallery.js"></script>
+<script src="../javascript/rooms.js"></script>
+<script src="../javascript/booking.js"></script>
+<script src="../javascript/views.js"></script>
+<script src="../javascript/map.js"></script>
+</body>
+
+</html>

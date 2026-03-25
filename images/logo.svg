@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" role="img" aria-label="Grand Horizon Suites logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0a2463"/>
+      <stop offset="100%" stop-color="#2a9d8f"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="64" rx="8" fill="none"/>
+  <g transform="translate(12,8)">
+    <circle cx="24" cy="24" r="18" fill="url(#g)"/>
+    <path d="M14 24 L24 12 L34 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="20" y="26" width="8" height="4" fill="#fff" rx="1"/>
+  </g>
+  <g transform="translate(72,18)">
+    <text x="0" y="12" font-family="Playfair Display, serif" font-size="20" fill="#0a2463">Grand Horizon</text>
+    <text x="0" y="36" font-family="Open Sans, sans-serif" font-size="12" fill="#2a9d8f">Suites</text>
+  </g>
+</svg>

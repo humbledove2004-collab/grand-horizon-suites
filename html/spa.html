@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover a sanctuary of peace and rejuvenation at Serenity Spa. Experience our signature Cocoa Butter rituals and state-of-the-art Wellness Center.">
+    <meta name="keywords" content="spa, wellness, massage, yoga, fitness, Accra spa, luxury wellness, relaxation">
+    <title>Spa & Wellness | Grand Horizon Suites</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="stylesheet" href="../stylesheet/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="Grand Horizon Suites">
+                <img src="../images/logo.svg" alt="Grand Horizon Suites logo" class="site-logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#rooms">Rooms</a></li>
+                <li><a href="dining.html">Dining</a></li>
+                <li><a href="spa.html" class="active">Spa</a></li>
+                <li><a href="offers.html">Offers</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><button class="btn-book" id="openBooking">Book Now</button></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="hero secondary-hero" style="background-image: url('../images/spa-bg.jpg');">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Spa & Wellness</h1>
+                    <p class="hero-subtitle">Discover a sanctuary of peace and rejuvenation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spa Content -->
+    <section class="spa-details" style="padding: 80px 0;">
+        <div class="container">
+            <div class="features-grid" data-view="default">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Serinity.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Serenity Spa</h3>
+                        <p>Our award-winning Serenity Spa offers a comprehensive range of treatments designed to balance the mind, body, and soul. From traditional Ghanaian techniques to modern holistic therapies.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 9:00 AM - 9:00 PM</li>
+                            <li><i class="fas fa-leaf" style="color: var(--secondary); margin-right: 10px;"></i> Signature Cocoa Butter Rituals</li>
+                        </ul>
+                        <button class="btn-primary">Book a Treatment</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/gym.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Wellness Center</h3>
+                        <p>Maintain your fitness goals in our state-of-the-art Wellness Center. Featuring the latest cardio and strength equipment, along with dedicated spaces for stretching and functional training.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-dumbbell" style="color: var(--secondary); margin-right: 10px;"></i> 24/7 Access for Guests</li>
+                            <li><i class="fas fa-user-friends" style="color: var(--secondary); margin-right: 10px;"></i> Personal Training Available</li>
+                        </ul>
+                        <button class="btn-primary">Explore Facilities</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/yoga.webp');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Yoga & Meditation</h3>
+                        <p>Find your inner balance with our guided yoga and meditation sessions. Held on our rooftop deck or in our peaceful garden, these classes are suitable for all experience levels.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-sun" style="color: var(--secondary); margin-right: 10px;"></i> Sunrise Yoga: 6:00 AM Daily</li>
+                            <li><i class="fas fa-moon" style="color: var(--secondary); margin-right: 10px;"></i> Full Moon Meditation Sessions</li>
+                        </ul>
+                        <button class="btn-primary">Join a Class</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid" data-view="serenity">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/cocoa%20butter.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Cocoa Butter Ritual</h3>
+                        <p>Ind indulgent full-body treatment using warm Ghanaian cocoa butter to deeply nourish the skin, combined with slow, rhythmic massage techniques to melt away stress.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Duration: 90 minutes</li>
+                            <li><i class="fas fa-leaf" style="color: var(--secondary); margin-right: 10px;"></i> Includes exfoliation & body wrap</li>
+                        </ul>
+                        <button class="btn-primary">Book Cocoa Butter Ritual</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Hot%20Stone%20Therapy.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Hot Stone Therapy</h3>
+                        <p>Warm volcanic stones are placed along the body’s energy lines, easing muscle tension and encouraging deep relaxation while aromatic oils complete the calming experience.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Duration: 75 minutes</li>
+                            <li><i class="fas fa-heart" style="color: var(--secondary); margin-right: 10px;"></i> Ideal for muscle tension & fatigue</li>
+                        </ul>
+                        <button class="btn-primary">Book Hot Stone Therapy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid" data-view="wellness">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/gym.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Wellness Center</h3>
+                        <p>State-of-the-art fitness and conditioning with dedicated zones for cardio, strength, and functional training.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-dumbbell" style="color: var(--secondary); margin-right: 10px;"></i> 24/7 Access for Guests</li>
+                            <li><i class="fas fa-user-friends" style="color: var(--secondary); margin-right: 10px;"></i> Personal Training & Group Classes</li>
+                        </ul>
+                        <button class="btn-primary">Explore Facilities</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/yoga.webp');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Yoga & Meditation</h3>
+                        <p>Guided sessions on our rooftop deck or in the garden, designed to restore balance, flexibility and focus.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-sun" style="color: var(--secondary); margin-right: 10px;"></i> Sunrise Yoga: 6:00 AM Daily</li>
+                            <li><i class="fas fa-moon" style="color: var(--secondary); margin-right: 10px;"></i> Evening Meditation & Breathwork</li>
+                        </ul>
+                        <button class="btn-primary">Join a Class</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Grand Horizon Suites</h3>
+                    <p>Talented-Royals Academy</p>
+                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856" target="_blank" rel="noopener">+233 53 210 2856</a></p>
+                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link" href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html#rooms">Rooms & Suites</a></li>
+                        <li><a href="dining.html">Restaurants</a></li>
+                        <li><a href="spa.html">Spa & Wellness</a></li>
+                        <li><a href="offers.html">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer" aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://www.instagram.com/dadaba_ice_age" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <button id="newsletter-submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Grand Horizon Suites. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle">Book a Room / Contact Us</h3>
+                <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
+            </div>
+            <form id="bookingForm">
+                <input name="name" placeholder="Full name" required>
+                <input name="email" type="email" placeholder="Email address" required>
+                <input name="phone" placeholder="Phone" class="full">
+                <input name="checkin" type="date" placeholder="Check-in">
+                <input name="checkout" type="date" placeholder="Check-out">
+                <select name="guests">
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
+                </select>
+                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
+                <button type="submit">Request Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="../javascript/supabase-config.js"></script>
+    <script src="../javascript/contact-service.js"></script>
+    <script src="../javascript/ui-core.js"></script>
+    <script src="../javascript/modals.js"></script>
+    <script src="../javascript/booking.js"></script>
+    <script src="../javascript/views.js"></script>
+</body>
+
+</html>

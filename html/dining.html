@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Savor culinary masterpieces at Grand Horizon Suites. From fine dining to al fresco cocktails, experience the best of Ghanaian and international cuisine.">
+    <meta name="keywords" content="fine dining, Accra restaurant, luxury dining, Ghanaian cuisine, coastal cocktails, international menu">
+    <title>Exquisite Dining | Grand Horizon Suites</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="stylesheet" href="../stylesheet/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="Grand Horizon Suites">
+                <img src="../images/logo.svg" alt="Grand Horizon Suites logo" class="site-logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#rooms">Rooms</a></li>
+                <li><a href="dining.html" class="active">Dining</a></li>
+                <li><a href="spa.html">Spa</a></li>
+                <li><a href="offers.html">Offers</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><button class="btn-book" id="openBooking">Book Now</button></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="hero secondary-hero" style="background-image: url('../images/Background2.jpg');">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Exquisite Dining</h1>
+                    <p class="hero-subtitle">A journey of culinary excellence and refined flavors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Content -->
+    <section class="dining-details" style="padding: 80px 0;">
+        <div class="container">
+            <div class="features-grid" data-view="default">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/grandhall.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Pearl Dining</h3>
+                        <p>An elegant dining room offering refined international cuisine, seasonal tasting menus, and a calm, intimate atmosphere.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 6:30 PM - 10:30 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Chef’s seasonal tasting menu</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Signature Ghanaian & Continental Menu</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Smoked tilapia and avocado tartlet</div>
+                                        <div class="menu-dish-desc">Crisp pastry tart filled with Ghanaian smoked tilapia, avocado and chili-lime dressing.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Charcoal-grilled beef fillet</div>
+                                        <div class="menu-dish-desc">Prime beef fillet served with waakye-style rice, shito jus and garden vegetables.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Dark chocolate fondant</div>
+                                        <div class="menu-dish-desc">Warm molten chocolate cake with coconut ice cream and roasted pineapple.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/Oceanbreeze%202.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Ivory Charm Palace</h3>
+                        <p>A bright, stylish restaurant serving all-day favorites, from relaxed brunch plates to elevated evening specials.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 7:00 AM - 11:00 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Weekend brunch and afternoon tea</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Ghanaian & Continental Brunch</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Ghanaian breakfast platter</div>
+                                        <div class="menu-dish-desc">Koko, bofrot and koose served with warm milk and spiced groundnuts.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Cinnamon brioche French toast</div>
+                                        <div class="menu-dish-desc">Thick-cut brioche with caramelised plantain and vanilla cream.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Eggs Benedict Royale</div>
+                                        <div class="menu-dish-desc">Poached eggs and smoked salmon on brioche with garden hollandaise.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/horizonbar.avif');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Luminase Lounge</h3>
+                        <p>A softly lit lounge featuring handcrafted cocktails, small plates, and live music on select evenings.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 5:00 PM - 12:00 AM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Signature cocktails and tapas</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Lounge Small Plates</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Spiced kelewele bites</div>
+                                        <div class="menu-dish-desc">Golden-fried plantain tossed in ginger, chili and aromatic spices, with roasted groundnut dip.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Crispy calamari</div>
+                                        <div class="menu-dish-desc">Lightly battered calamari with lemon-garlic aioli and sea salt.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Artisan cheese and charcuterie</div>
+                                        <div class="menu-dish-desc">Selection of international cheeses, cured meats and seasonal fruit.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid" data-view="grand">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G1.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Landscape View</h3>
+                        <p>Panoramic views with curated tasting plates inspired by the coast and city lights.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 5:30 PM - 11:00 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: View-front tasting platters</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Gourmet Tasting Plates</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Smoked tilapia crostini</div>
+                                        <div class="menu-dish-desc">Brioche toast topped with smoked tilapia and silky shito cream.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Grilled tiger prawns</div>
+                                        <div class="menu-dish-desc">Butterflied prawns finished with citrus, garlic and garden herbs.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Mini dessert trilogy</div>
+                                        <div class="menu-dish-desc">Tasting trio of chocolate, coconut and tropical fruit desserts.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/bar%201.png');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Midnight Bar</h3>
+                        <p>Late-night cocktails, small plates, and live ambient music under the stars.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 8:00 PM - 2:00 AM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Late-night mixology</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Signature Cocktails & Bites</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Hibiscus royale</div>
+                                        <div class="menu-dish-desc">Sparkling wine infused with hibiscus syrup and fresh flowers.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Cocoa old fashioned</div>
+                                        <div class="menu-dish-desc">Ghanaian cocoa nib‑infused whisky with orange zest and bitters.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Golden plantain chips</div>
+                                        <div class="menu-dish-desc">Crisp plantain wafers with a trio of gourmet dips.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G3.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Moondance</h3>
+                        <p>Elegant evening dining with candlelit ambiance and chef’s seasonal specialties.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 6:00 PM - 11:30 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Multi-course chef’s menu</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Chef’s Ghanaian & Continental Journey</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Roasted pumpkin and coconut soup</div>
+                                        <div class="menu-dish-desc">Silky pumpkin and coconut broth with grilled prawns and chili oil.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Charcoal-grilled lamb loin</div>
+                                        <div class="menu-dish-desc">Tender lamb served with waakye risotto and seasonal garden vegetables.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Vanilla bean crème brûlée</div>
+                                        <div class="menu-dish-desc">Classic baked custard with crackling sugar and citrus salad.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid" data-view="ocean">
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/horizonbar.avif');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>The Horizon Bar</h3>
+                        <p>Located on our top floor, the Horizon Bar offers panoramic views of the city. Enjoy premium spirits, rare wines, and a selection of gourmet small plates in a chic, contemporary setting.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 4:00 PM - 1:00 AM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Rooftop cocktails and jazz</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Skyline Bar Favorites</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Chilled tiger prawns</div>
+                                        <div class="menu-dish-desc">Served on ice with shito cocktail sauce and citrus.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Truffle and parmesan fries</div>
+                                        <div class="menu-dish-desc">Crisp fries tossed in truffle oil, parmesan and gold dust salt.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Mini wagyu sliders</div>
+                                        <div class="menu-dish-desc">Brioche sliders with wagyu patty, caramelised onions and aged cheddar.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G4.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Harbor Lights Grill</h3>
+                        <p>Grilled seafood and signature steaks served with sweeping views of the shoreline.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 12:00 PM - 10:00 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Charcoal-grilled seafood</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Sea & Grill Highlights</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Grilled red snapper</div>
+                                        <div class="menu-dish-desc">Whole snapper with banku, shito and citrus slaw.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Charcoal-seared ribeye steak</div>
+                                        <div class="menu-dish-desc">Ribeye with peppercorn jus, potato gratin and herb butter.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Garlic herb lobster tail</div>
+                                        <div class="menu-dish-desc">Grilled lobster with lemon butter and garden greens.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image" style="background-image: url('../images/G5.jpg');" loading="lazy"></div>
+                    <div class="feature-content">
+                        <h3>Sunset Terrace</h3>
+                        <p>Relaxed open-air dining, handcrafted cocktails, and tapas at golden hour.</p>
+                        <ul class="dining-meta">
+                            <li><i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Open: 3:00 PM - 11:00 PM</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 10px;"></i> Key Specialty: Sunset tapas and spritzers</li>
+                        </ul>
+                        <div class="menu-details" style="display: none;">
+                            <h4>Ghanaian & Mediterranean Tapas</h4>
+                            <ul>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Ghanaian tapas board</div>
+                                        <div class="menu-dish-desc">Kelewele, gizzard skewers and yam chips with house sauces.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Grilled calamari</div>
+                                        <div class="menu-dish-desc">Calamari with lemon-garlic rub, herb salad and olive oil.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="menu-dish">
+                                        <div class="menu-dish-name">Mediterranean mezze</div>
+                                        <div class="menu-dish-desc">Hummus, baba ghanoush and warm pita bread.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary">Reserve a Table</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Grand Horizon Suites</h3>
+                    <p>Talented-Royals Academy</p>
+                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856" target="_blank" rel="noopener">+233 53 210 2856</a></p>
+                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link" href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html#rooms">Rooms & Suites</a></li>
+                        <li><a href="dining.html">Restaurants</a></li>
+                        <li><a href="spa.html">Spa & Wellness</a></li>
+                        <li><a href="offers.html">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer" aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://www.instagram.com/dadaba_ice_age" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <button id="newsletter-submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Grand Horizon Suites. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle">Book a Room / Contact Us</h3>
+                <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
+            </div>
+            <form id="bookingForm">
+                <input name="name" placeholder="Full name" required>
+                <input name="email" type="email" placeholder="Email address" required>
+                <input name="phone" placeholder="Phone" class="full">
+                <input name="checkin" type="date" placeholder="Check-in">
+                <input name="checkout" type="date" placeholder="Check-out">
+                <select name="guests">
+                    <option>1 Guest</option>
+                    <option>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4+ Guests</option>
+                </select>
+                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
+                <button type="submit">Request Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="menuModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+            <div class="modal-header">
+                <h3 id="menuModalTitle">Menu</h3>
+                <button class="modal-close" id="closeMenuModal" aria-label="Close">✕</button>
+            </div>
+            <div id="menuModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="../javascript/supabase-config.js"></script>
+    <script src="../javascript/contact-service.js"></script>
+    <script src="../javascript/ui-core.js"></script>
+    <script src="../javascript/modals.js"></script>
+    <script src="../javascript/booking.js"></script>
+    <script src="../javascript/views.js"></script>
+</body>
+
+</html>
