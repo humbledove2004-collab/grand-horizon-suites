@@ -4,6 +4,8 @@
 
   const imageLightbox = document.getElementById("imageLightbox");
   const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxStoryTitle = document.getElementById("lightboxStoryTitle");
+  const lightboxStoryIntro = document.getElementById("lightboxStoryIntro");
   const lightboxClose = document.getElementById("lightboxClose");
   const lightboxPrev = document.getElementById("lightboxPrev");
   const lightboxNext = document.getElementById("lightboxNext");
@@ -11,11 +13,24 @@
   let galleryImages = [];
   let currentIndex = 0;
 
+  const setLightboxContent = (index) => {
+    if (!lightboxImage || galleryImages.length === 0) return;
+    currentIndex = (index + galleryImages.length) % galleryImages.length;
+    const item = galleryImages[currentIndex];
+    lightboxImage.src = item.src;
+    lightboxImage.alt = item.alt || "Enlarged image";
+    if (lightboxStoryTitle) {
+      lightboxStoryTitle.textContent = item.title || item.alt || "Visual Story";
+    }
+    if (lightboxStoryIntro) {
+      lightboxStoryIntro.textContent = item.intro || "Discover a signature moment from the Grand Horizon experience.";
+    }
+  };
+
   window.GH.openLightbox = function(images, index) {
     if (!imageLightbox || !lightboxImage) return;
     galleryImages = images;
-    currentIndex = (index + galleryImages.length) % galleryImages.length;
-    lightboxImage.src = galleryImages[currentIndex];
+    setLightboxContent(index);
     imageLightbox.classList.add("open");
     imageLightbox.setAttribute("aria-hidden", "false");
   };
@@ -28,20 +43,40 @@
   };
 
   window.GH.updateLightbox = function(index) {
-    if (!lightboxImage) return;
-    currentIndex = (index + galleryImages.length) % galleryImages.length;
-    lightboxImage.src = galleryImages[currentIndex];
+    if (!lightboxImage || galleryImages.length === 0) return;
+    setLightboxContent(index);
   };
 
   // --- Gallery Setup ---
   const initGallery = () => {
-    const galleryImgs = document.querySelectorAll(".gallery-grid img");
-    if (galleryImgs.length === 0) return;
+    const galleryItems = document.querySelectorAll(".gallery-grid .gallery-item");
+    if (galleryItems.length === 0) return;
 
-    const images = Array.from(galleryImgs).map(img => img.src);
-    galleryImgs.forEach((img, i) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => window.GH.openLightbox(images, i));
+    const images = Array.from(galleryItems).map((item) => {
+      const img = item.querySelector("img");
+      return {
+        src: img?.src || "",
+        alt: img?.alt || "",
+        title: img?.dataset.storyTitle || "",
+        intro: img?.dataset.storyIntro || ""
+      };
+    });
+
+    galleryItems.forEach((item, i) => {
+      item.style.cursor = "zoom-in";
+      item.setAttribute("role", "button");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("aria-label", `Open image ${i + 1} in lightbox`);
+      item.addEventListener("click", () => window.GH.openLightbox(images, i));
+      item.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          window.GH.openLightbox(images, i);
+        }
+      });
+
+      const img = item.querySelector("img");
+      if (img) img.style.cursor = "zoom-in";
     });
   };
 

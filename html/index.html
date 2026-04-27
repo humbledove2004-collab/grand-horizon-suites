@@ -39,7 +39,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- International Phone Input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
@@ -58,6 +64,11 @@
                 <li><a href="spa.html">Spa</a></li>
                 <li><a href="offers.html">Offers</a></li>
                 <li><a href="#contact">Contact Us</a></li>
+                <li id="auth-nav-item">
+                    <button class="btn-secondary" id="openAuthModal" style="padding: 8px 15px; font-size: 0.9rem;">
+                        <i class="fas fa-user-circle"></i> Guest Profile
+                    </button>
+                </li>
                 <li><button class="btn-book" id="openBooking">Book Now</button></li>
             </ul>
             <button class="hamburger" id="hamburger">
@@ -185,42 +196,42 @@
                 <p class="section-subtitle">Experience the Art of Living</p>
                 <div class="gallery-grid">
                     <div class="gallery-item large">
-                        <img src="../images/G1.jpg" alt="Luxury Suite View" loading="lazy">
+                        <img src="../images/G1.jpg" alt="Luxury Suite View" loading="lazy" data-story-title="Luxury Living" data-story-intro="Wake up to panoramic skyline views, premium linens, and handcrafted interiors designed for restful indulgence.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Luxury Living</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G2.jpg" alt="Spa Treatment Room" loading="lazy">
+                        <img src="../images/G2.jpg" alt="Spa Treatment Room" loading="lazy" data-story-title="Wellness Oasis" data-story-intro="Enter a calm sanctuary where signature treatments, aromatherapy, and ambient tones renew body and mind.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Wellness Oasis</span>
                         </div>
                     </div>
                     <div class="gallery-item tall">
-                        <img src="../images/G3.jpg" alt="Fine Dining Experience" loading="lazy">
+                        <img src="../images/G3.jpg" alt="Fine Dining Experience" loading="lazy" data-story-title="Culinary Excellence" data-story-intro="From tasting menus to private pairings, each course celebrates local ingredients with world-class presentation.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Culinary Excellence</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G4.jpg" alt="Hotel Exterior Night" loading="lazy">
+                        <img src="../images/G4.jpg" alt="Hotel Exterior Night" loading="lazy" data-story-title="Iconic Architecture" data-story-intro="As evening lights rise, the Grand Horizon facade becomes a timeless landmark at the heart of the city.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Iconic Architecture</span>
                         </div>
                     </div>
                     <div class="gallery-item wide">
-                        <img src="../images/G5.jpg" alt="Poolside Relaxation" loading="lazy">
+                        <img src="../images/G5.jpg" alt="Poolside Relaxation" loading="lazy" data-story-title="Serene Moments" data-story-intro="Unwind poolside with curated service, soft lounge music, and uninterrupted moments of resort-style tranquility.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Serene Moments</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G6.png" alt="Grand Lobby Area" loading="lazy">
+                        <img src="../images/G6.png" alt="Grand Lobby Area" loading="lazy" data-story-title="The Grand Entrance" data-story-intro="Step into a dramatic welcome space where elegant lighting and concierge hospitality set the tone for your stay.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>The Grand Entrance</span>
@@ -309,6 +320,29 @@
             <h2 class="section-title">Our Location</h2>
             <p class="section-subtitle">Find us in the heart of Accra's coastal district</p>
             <div class="location-container">
+                <div class="trip-planner">
+                    <div class="trip-search-row">
+                        <input id="locationSearchInput" type="text" placeholder="Enter your current location (e.g., Osu, Accra)">
+                        <button id="locationSearchBtn" class="btn-secondary" type="button"><i class="fas fa-search-location"></i> Find Route</button>
+                    </div>
+                    <div class="ride-options" id="rideOptions">
+                        <button type="button" class="ride-option active" data-ride="economy">
+                            <span class="ride-name">Economy</span>
+                            <span class="ride-meta" id="rideEconomyMeta">ETA 0 min • GHS 0</span>
+                        </button>
+                        <button type="button" class="ride-option" data-ride="comfort">
+                            <span class="ride-name">Comfort</span>
+                            <span class="ride-meta" id="rideComfortMeta">ETA 0 min • GHS 0</span>
+                        </button>
+                        <button type="button" class="ride-option" data-ride="premium">
+                            <span class="ride-name">Premium</span>
+                            <span class="ride-meta" id="ridePremiumMeta">ETA 0 min • GHS 0</span>
+                        </button>
+                    </div>
+                    <button id="bookRideBtn" class="btn-primary" type="button" style="margin-top: 10px;">
+                        <i class="fab fa-whatsapp"></i> Book This Ride
+                    </button>
+                </div>
                 <div id="map" style="height: 450px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></div>
                 <div class="map-controls">
                     <button id="trackLocation" class="btn-primary">
@@ -360,6 +394,62 @@
         </div>
     </footer>
 
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 id="authModalTitle">Guest Login</h3>
+                <button class="modal-close" id="closeAuthModal" aria-label="Close">✕</button>
+            </div>
+            <div id="auth-forms">
+                <!-- Login Form -->
+                <form id="loginForm">
+                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Sign in to access your previous booking details and faster checkout.</p>
+                    <input type="email" name="email" placeholder="Email address" required class="full" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                    <input type="password" name="password" placeholder="Password" required class="full">
+                    <button type="submit" class="full">Login</button>
+                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
+                        New guest? <a href="#" id="showRegister" style="color: var(--secondary); font-weight: 600;">Create an account</a>
+                    </p>
+                </form>
+
+                <!-- Register Form (Hidden by default) -->
+                <form id="registerForm" style="display: none;">
+                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Create a guest profile for a personalized luxury experience.</p>
+                    <input type="text" name="full_name" placeholder="Full name" required class="full">
+                    <input type="email" name="email" placeholder="Email address" required class="full" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                    <input type="password" name="password" placeholder="Password" required class="full">
+                    <button type="submit" class="full">Create Account</button>
+                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
+                        Already have an account? <a href="#" id="showLogin" style="color: var(--secondary); font-weight: 600;">Login here</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Profile View (Visible when logged in) -->
+            <div id="profile-view" style="display: none;">
+                <div class="profile-header" style="text-align: center; margin-bottom: 20px;">
+                    <div class="user-avatar" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h4 id="user-display-name">Guest Name</h4>
+                    <p id="user-display-email" style="color: var(--gray); font-size: 0.9rem;">email@example.com</p>
+                </div>
+                
+                <div class="profile-section">
+                    <h5 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Booking History</h5>
+                    <div id="booking-history-list" style="max-height: 200px; overflow-y: auto; font-size: 0.85rem;">
+                        <p style="color: #999; text-align: center; padding: 10px;">No previous bookings found.</p>
+                    </div>
+                </div>
+
+                <button id="logoutBtn" class="btn-secondary full" style="margin-top: 20px;">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Booking Modal -->
     <div class="modal" id="bookingModal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -369,18 +459,28 @@
             </div>
             <form id="bookingForm">
                 <input name="name" placeholder="Full name" required>
-                <input name="email" type="email" placeholder="Email address" required>
-                <input name="phone" placeholder="Phone" class="full">
+                <input name="email" type="email" placeholder="Email address" required 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                <input name="phone" id="phoneInput" type="tel" placeholder="Phone" class="full">
                 <input name="checkin" type="date" placeholder="Check-in">
                 <input name="checkout" type="date" placeholder="Check-out">
                 <select name="guests">
-                    <option>1 Guest</option>
-                    <option>2 Guests</option>
-                    <option>3 Guests</option>
-                    <option>4+ Guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4+">4+ Guests</option>
                 </select>
                 <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
-                <button type="submit">Request Booking</button>
+                <div class="payment-options" style="grid-column: 1 / -1; margin-top: 10px; display: flex; gap: 15px; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <label style="font-weight: 600; color: var(--primary);"><i class="fas fa-credit-card"></i> Payment:</label>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="payment_method" value="request" checked> Reserve Only
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="payment_method" value="stripe"> Pay Now (Secure)
+                    </label>
+                </div>
+                <button type="submit" id="bookingSubmitBtn">Request Booking</button>
             </form>
         </div>
     </div>
@@ -421,12 +521,25 @@
         <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
         <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous">‹</button>
         <img id="lightboxImage" src="" alt="Enlarged image" />
+        <div class="lightbox-story" id="lightboxStory">
+            <h4 id="lightboxStoryTitle">Visual Story</h4>
+            <p id="lightboxStoryIntro"></p>
+        </div>
         <button class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
     </div>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- International Phone Input JS -->
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
+<!-- Payment System (Stripe) -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Supabase JS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 <!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -439,6 +552,7 @@
 
 <!-- Modular Scripts -->
 <script src="../javascript/ui-core.js"></script>
+<script src="../javascript/auth.js"></script>
 <script src="../javascript/modals.js"></script>
 <script src="../javascript/gallery.js"></script>
 <script src="../javascript/rooms.js"></script>

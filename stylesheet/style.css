@@ -435,6 +435,34 @@ h4 {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
+.lightbox-story {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: min(90vw, 760px);
+    background: linear-gradient(145deg, rgba(8, 29, 77, 0.9), rgba(10, 36, 99, 0.78));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-story h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    color: var(--secondary);
+    font-family: 'Playfair Display', serif;
+}
+
+.lightbox-story p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.93);
+}
+
 .lightbox-close {
     position: absolute;
     top: 18px;
@@ -496,6 +524,20 @@ h4 {
 
     .modal form {
         grid-template-columns: 1fr
+    }
+
+    .lightbox-story {
+        width: min(94vw, 94vw);
+        bottom: 16px;
+        padding: 12px 14px;
+    }
+
+    .lightbox-story h4 {
+        font-size: 1.05rem;
+    }
+
+    .lightbox-story p {
+        font-size: 0.88rem;
     }
 }
 
@@ -1068,6 +1110,22 @@ h4 {
     color: var(--gray);
 }
 
+/* Status Badges */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.status-pending { background: #fff8e1; color: #f57c00; }
+.status-confirmed { background: #e8f5e9; color: #2e7d32; }
+.status-cancelled, .status-rejected { background: #ffebee; color: #c62828; }
+.status-full { background: #f3e5f5; color: #7b1fa2; }
+.status-replied { background: #e3f2fd; color: #1976d2; }
+
 @media (max-width: 480px) {
     .toast-container {
         top: auto;
@@ -1110,6 +1168,54 @@ html {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+}
+
+/* International Phone Input Tweaks */
+.iti {
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+.iti__country-list {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 10000;
+}
+
+.iti__country {
+    padding: 10px 15px;
+    transition: background 0.2s ease;
+}
+
+.iti__country:hover {
+    background-color: var(--light);
+}
+
+.iti__selected-dial-code {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Ensure modal content handles the dropdown */
+.modal-content {
+    overflow: visible;
+}
+
+/* Auth Button Styles */
+#openAuthModal.logged-in {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+#openAuthModal.logged-in:hover {
+    background: #081d4d;
+}
+
+.history-item:last-child {
+    border-bottom: none !important;
 }
 
 @media (max-width: 480px) {
@@ -1175,6 +1281,76 @@ html {
 
 .map-controls {
     margin-top: 20px;
+}
+
+.trip-planner {
+    background: #fff;
+    border: 1px solid #e8ebf0;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 20px rgba(10, 36, 99, 0.06);
+}
+
+.trip-search-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+}
+
+#locationSearchInput {
+    border: 1px solid #dfe4eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+#locationSearchInput:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.12);
+}
+
+.ride-options {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.ride-option {
+    border: 1px solid #d8dde6;
+    border-radius: 10px;
+    background: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ride-option:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.ride-option.active {
+    border-color: var(--primary);
+    background: rgba(10, 36, 99, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(10, 36, 99, 0.2);
+}
+
+.ride-name {
+    display: block;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
+}
+
+.ride-meta {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray);
 }
 
 #trackLocation {
@@ -1498,6 +1674,14 @@ html {
     }
 
     .rooms-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-search-row {
+        grid-template-columns: 1fr;
+    }
+
+    .ride-options {
         grid-template-columns: 1fr;
     }
 }
