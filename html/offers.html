@@ -8,13 +8,18 @@
     <meta name="keywords" content="special offers, honeymoon packages, extended stay discount, weekend getaway, Accra hotel deals">
     <title>Special Offers | Grand Horizon Suites</title>
     <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
-    <link rel="stylesheet" href="../stylesheet/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- International Phone Input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+    <link rel="stylesheet" href="../stylesheet/style.css">
 </head>
 
 <body>
@@ -31,6 +36,11 @@
                 <li><a href="spa.html">Spa</a></li>
                 <li><a href="offers.html" class="active">Offers</a></li>
                 <li><a href="index.html#contact">Contact Us</a></li>
+                <li id="auth-nav-item">
+                    <button class="btn-secondary" id="openAuthModal" style="padding: 8px 15px; font-size: 0.9rem;">
+                        <i class="fas fa-user-circle"></i> Guest Profile
+                    </button>
+                </li>
                 <li><button class="btn-book" id="openBooking">Book Now</button></li>
             </ul>
             <button class="hamburger" id="hamburger">
@@ -224,6 +234,62 @@
         </div>
     </footer>
 
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 id="authModalTitle">Guest Login</h3>
+                <button class="modal-close" id="closeAuthModal" aria-label="Close">✕</button>
+            </div>
+            <div id="auth-forms">
+                <!-- Login Form -->
+                <form id="loginForm">
+                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Sign in to access your previous booking details and faster checkout.</p>
+                    <input type="email" name="email" placeholder="Email address" required class="full" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                    <input type="password" name="password" placeholder="Password" required class="full">
+                    <button type="submit" class="full">Login</button>
+                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
+                        New guest? <a href="#" id="showRegister" style="color: var(--secondary); font-weight: 600;">Create an account</a>
+                    </p>
+                </form>
+
+                <!-- Register Form (Hidden by default) -->
+                <form id="registerForm" style="display: none;">
+                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Create a guest profile for a personalized luxury experience.</p>
+                    <input type="text" name="full_name" placeholder="Full name" required class="full">
+                    <input type="email" name="email" placeholder="Email address" required class="full" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                    <input type="password" name="password" placeholder="Password" required class="full">
+                    <button type="submit" class="full">Create Account</button>
+                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
+                        Already have an account? <a href="#" id="showLogin" style="color: var(--secondary); font-weight: 600;">Login here</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Profile View (Visible when logged in) -->
+            <div id="profile-view" style="display: none;">
+                <div class="profile-header" style="text-align: center; margin-bottom: 20px;">
+                    <div class="user-avatar" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h4 id="user-display-name">Guest Name</h4>
+                    <p id="user-display-email" style="color: var(--gray); font-size: 0.9rem;">email@example.com</p>
+                </div>
+                
+                <div class="profile-section">
+                    <h5 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Booking History</h5>
+                    <div id="booking-history-list" style="max-height: 200px; overflow-y: auto; font-size: 0.85rem;">
+                        <p style="color: #999; text-align: center; padding: 10px;">No previous bookings found.</p>
+                    </div>
+                </div>
+
+                <button id="logoutBtn" class="btn-secondary full" style="margin-top: 20px;">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Booking Modal -->
     <div class="modal" id="bookingModal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -233,27 +299,41 @@
             </div>
             <form id="bookingForm">
                 <input name="name" placeholder="Full name" required>
-                <input name="email" type="email" placeholder="Email address" required>
-                <input name="phone" placeholder="Phone" class="full">
+                <input name="email" type="email" placeholder="Email address" required 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                <input name="phone" id="phoneInput" type="tel" placeholder="Phone" class="full">
                 <input name="checkin" type="date" placeholder="Check-in">
                 <input name="checkout" type="date" placeholder="Check-out">
                 <select name="guests">
-                    <option>1 Guest</option>
-                    <option>2 Guests</option>
-                    <option>3 Guests</option>
-                    <option>4+ Guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4+">4+ Guests</option>
                 </select>
                 <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
-                <button type="submit">Request Booking</button>
+                <div class="payment-options" style="grid-column: 1 / -1; margin-top: 10px; display: flex; gap: 15px; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <label style="font-weight: 600; color: var(--primary);"><i class="fas fa-credit-card"></i> Payment:</label>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="payment_method" value="request" checked> Reserve Only
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="payment_method" value="stripe"> Pay Now (Secure)
+                    </label>
+                </div>
+                <button type="submit" id="bookingSubmitBtn">Request Booking</button>
             </form>
         </div>
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="../javascript/supabase-config.js"></script>
     <script src="../javascript/contact-service.js"></script>
     <script src="../javascript/ui-core.js"></script>
+    <script src="../javascript/auth.js"></script>
     <script src="../javascript/modals.js"></script>
     <script src="../javascript/booking.js"></script>
     <script src="../javascript/views.js"></script>

@@ -4,7 +4,23 @@
 const SUPABASE_URL = "https://zfjyqvdwsbzarobyfzsz.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmanlxdmR3c2J6YXJvYnlmenN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMTEwMjMsImV4cCI6MjA4NTg4NzAyM30.Ot1DcL9vRc19KS6C7Egd2NEUkBOOF0AH26rKYpYDoH8";
 
-// Initialize Supabase client
+// Stripe Configuration (Optional for Payment Links, Required for SDK)
+const STRIPE_PUBLISHABLE_KEY = "pk_test_51T4JdDEubKPeyhMdMwCMwPmcnUmr1XDxbLzuooFhAAcxlWP8hsLuVyCCntzK7F7yWXPanYhHGY00iDpB7UWAjUTC00rUK2XcFi";
+const stripe = typeof Stripe !== 'undefined' ? Stripe(STRIPE_PUBLISHABLE_KEY) : null;
+
+// Initialize official Supabase client from CDN global safely.
+const supabaseBrowserClient =
+  typeof window !== "undefined" &&
+  window.supabase &&
+  typeof window.supabase.createClient === "function"
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+// Expose the initialized client explicitly for all app scripts.
+window.GH = window.GH || {};
+window.GH.supabase = supabaseBrowserClient;
+
+// Initialize custom Supabase client (Backward compatibility)
 const supabaseClient = (() => {
   const CONFIG_OK =
     typeof SUPABASE_URL === "string" &&
