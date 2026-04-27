@@ -48,6 +48,7 @@ class ContactService {
         check_out: formData.checkout || null,
         guests: formData.guests,
         message: formData.message,
+        payment_method: formData.payment_method || 'request',
         status: "pending",
         created_at: new Date().toISOString(),
         replied: false,

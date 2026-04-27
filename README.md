@@ -16,39 +16,41 @@ Grand Horizon Suites is a premium luxury hotel digital experience located in Acc
 -   A [Supabase](https://supabase.com/) account.
 -   A web server (e.g., Live Server in VS Code).
 
-### 2. Database Schema (Supabase)
-Run the following SQL in your Supabase SQL Editor to create the required tables:
+### 2. Database Schema & Auth (Supabase)
+
+#### Authentication
+1.  Go to **Authentication** > **Providers** in your Supabase Dashboard.
+2.  Enable the **Email** provider.
+3.  (Optional for testing) Disable **Confirm email** to allow instant login after registration.
+
+#### Database Tables
+Run the following SQL in your Supabase SQL Editor:
 
 ```sql
--- Create contacts table
-CREATE TABLE IF NOT EXISTS contacts (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  phone TEXT,
-  check_in DATE,
-  check_out DATE,
-  guests TEXT,
-  message TEXT,
-  status TEXT DEFAULT 'pending',
-  replied BOOLEAN DEFAULT false,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
-);
-
--- Create subscribers table
-CREATE TABLE IF NOT EXISTS subscribers (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  email TEXT UNIQUE NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
-);
-
--- Enable RLS (Row Level Security)
+-- The 'contacts' table should already exist. 
+-- Ensure it has RLS enabled so guests can only see their own history if they are logged in.
 ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
-ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
 
--- Create Policies (Allow anyone to insert, only admins to read)
-CREATE POLICY "Enable insert for everyone" ON contacts FOR INSERT WITH CHECK (true);
-CREATE POLICY "Enable insert for everyone" ON subscribers FOR INSERT WITH CHECK (true);
+-- Policy: Allow users to see only their own bookings based on email
+CREATE POLICY "Users can view their own booking history" ON contacts
+  FOR SELECT USING (auth.jwt() ->> 'email' = email);
+
+-- STAFF POLICIES (Run these to enable the Admin Dashboard)
+-- Replace 'staff@grandhorizon.com' with your actual staff email
+CREATE POLICY "Staff can view all bookings" ON contacts
+  FOR SELECT USING (auth.jwt() ->> 'email' = 'humbledove2004@gmail.com');
+
+CREATE POLICY "Staff can update bookings" ON contacts
+  FOR UPDATE USING (auth.jwt() ->> 'email' = 'humbledove2004@gmail.com');
+
+CREATE POLICY "Staff can delete bookings" ON contacts
+  FOR DELETE USING (auth.jwt() ->> 'email' = 'humbledove2004@gmail.com');
+```
+
+### ⚡ Troubleshooting "Database Outdated" or Missing Column
+If you created your database earlier and see a "payment_method missing" error, run this SQL:
+```sql
+ALTER TABLE contacts ADD COLUMN IF NOT EXISTS payment_method TEXT DEFAULT 'request';
 ```
 
 ### 3. Configuration
@@ -65,6 +67,15 @@ To receive real-time emails without a backend:
 4.  Open `javascript/contact-service.js`.
 5.  Update `init()` with your `PUBLIC_KEY`.
 6.  Update `sendEmail()` with your `SERVICE_ID` and `TEMPLATE_ID`.
+
+#### Stripe (Payment System)
+To collect payments securely:
+1.  Create an account at [Stripe.com](https://stripe.com/).
+2.  In the Dashboard, go to **Payment Links** and create a new link for your suites (e.g., $499 for Aegean View Suite).
+3.  Copy the **Payment Link URL**.
+4.  Open `javascript/booking.js`.
+5.  Replace `STRIPE_PAYMENT_LINK` with your link.
+6.  (Optional) For full automation, set up a **Stripe Webhook** to your backend (requires a server or Supabase Edge Function).
 
 ## 📂 Project Structure
 

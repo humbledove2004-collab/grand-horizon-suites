@@ -13,23 +13,29 @@
   const closeFeatureModal = document.getElementById("closeFeatureModal");
 
   const menuModal = document.getElementById("menuModal");
+  const menuModalTitle = document.getElementById("menuModalTitle");
+  const menuModalBody = document.getElementById("menuModalBody");
   const closeMenuModal = document.getElementById("closeMenuModal");
+
+  const authModal = document.getElementById("authModal");
+  const closeAuthModal = document.getElementById("closeAuthModal");
+  const openAuthModal = document.getElementById("openAuthModal");
 
   // --- Common Helper ---
   window.GH.openModal = function(modal) {
-    if (modal) {
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      const first = modal.querySelector('input[name="name"]');
-      if (first) first.focus();
-    }
+    if (!modal) return;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden"; // Prevent scroll
+    const first = modal.querySelector('input[name="name"]');
+    if (first) first.focus();
   };
 
   window.GH.closeModal = function(modal) {
-    if (modal) {
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-    }
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = ""; // Restore scroll
   };
 
   // --- Booking Modal Prefilling ---
@@ -43,7 +49,7 @@
   };
 
   // --- Event Listeners for Closing ---
-  [bookingModal, roomModal, featureModal, menuModal].forEach(modal => {
+  [bookingModal, roomModal, featureModal, menuModal, authModal].forEach(modal => {
     if (modal) {
       modal.addEventListener("click", (e) => {
         if (e.target === modal) window.GH.closeModal(modal);
@@ -55,11 +61,13 @@
   if (closeRoomModal) closeRoomModal.onclick = () => window.GH.closeModal(roomModal);
   if (closeFeatureModal) closeFeatureModal.onclick = () => window.GH.closeModal(featureModal);
   if (closeMenuModal) closeMenuModal.onclick = () => window.GH.closeModal(menuModal);
+  if (closeAuthModal) closeAuthModal.onclick = () => window.GH.closeModal(authModal);
+  if (openAuthModal) openAuthModal.onclick = () => window.GH.openModal(authModal);
 
   // --- Keyboard Support (ESC to close any open modal) ---
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      [bookingModal, roomModal, featureModal, menuModal].forEach(modal => {
+      [bookingModal, roomModal, featureModal, menuModal, authModal].forEach(modal => {
         if (modal && modal.classList.contains("open")) {
           window.GH.closeModal(modal);
         }
