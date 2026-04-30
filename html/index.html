@@ -4,10 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Experience refined luxury and contemporary elegance at Grand Horizon Suites, Accra's premier coastal hotel.">
+    <meta name="description"
+        content="Experience refined luxury and contemporary elegance at Grand Horizon Suites, Accra's premier coastal hotel.">
     <meta name="keywords" content="luxury hotel, Accra, coastal suites, fine dining, spa, wellness, vacation, Ghana">
     <title>Grand Horizon Suites | Luxury Hotel</title>
     <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+
+    <!-- PWA Manifest and Meta Tags -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#0a2463">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Grand Horizon">
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -51,6 +59,9 @@
 </head>
 
 <body>
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
@@ -65,7 +76,7 @@
                 <li><a href="offers.html">Offers</a></li>
                 <li><a href="#contact">Contact Us</a></li>
                 <li id="auth-nav-item">
-                    <button class="btn-secondary" id="openAuthModal" style="padding: 8px 15px; font-size: 0.9rem;">
+                    <button class="btn-secondary auth-nav-btn" id="openAuthModal">
                         <i class="fas fa-user-circle"></i> Guest Profile
                     </button>
                 </li>
@@ -79,7 +90,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-overlay">
+        <div class="hero-overlay" id="main-content">
             <div class="container">
                 <div class="hero-content">
                     <h1>Where Refined Luxury Meets Accra’s Coastal Charm</h1>
@@ -106,7 +117,8 @@
                     <div class="feature-content">
                         <h3>The Grand Hall</h3>
                         <p>Fine Dining & International Cuisine</p>
-                        <a href="dining.html?view=grand" class="btn-text explore-btn">Explore Menu <i class="fas fa-arrow-right"></i></a>
+                        <a href="dining.html?view=grand" class="btn-text explore-btn">Explore Menu <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="feature-card">
@@ -114,7 +126,8 @@
                     <div class="feature-content">
                         <h3>Ocean Breeze Terrace</h3>
                         <p>Al Fresco Dining & Cocktails</p>
-                        <a href="dining.html?view=ocean" class="btn-text explore-btn">Explore Menu <i class="fas fa-arrow-right"></i></a>
+                        <a href="dining.html?view=ocean" class="btn-text explore-btn">Explore Menu <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -173,8 +186,7 @@
                     data-desc="Two bedrooms, private terrace, personal chef available." data-price="$1299/night"
                     data-images="../images/P1.jpg,../images/P2.jpg,../images/P3.jpg"
                     data-amenities="Chef Service,Private Transfer,Spa Access">
-                    <div class="room-image"
-                        style="background-image: url('../images/P1.jpg');" loading="lazy">
+                    <div class="room-image" style="background-image: url('../images/P1.jpg');" loading="lazy">
                         <span class="room-price">$1299<span>/night</span></span>
                     </div>
                     <div class="room-info">
@@ -196,42 +208,54 @@
                 <p class="section-subtitle">Experience the Art of Living</p>
                 <div class="gallery-grid">
                     <div class="gallery-item large">
-                        <img src="../images/G1.jpg" alt="Luxury Suite View" loading="lazy" data-story-title="Luxury Living" data-story-intro="Wake up to panoramic skyline views, premium linens, and handcrafted interiors designed for restful indulgence.">
+                        <img src="../images/G1.jpg" alt="Luxury Suite View" loading="lazy"
+                            data-story-title="Luxury Living"
+                            data-story-intro="Wake up to panoramic skyline views, premium linens, and handcrafted interiors designed for restful indulgence.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Luxury Living</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G2.jpg" alt="Spa Treatment Room" loading="lazy" data-story-title="Wellness Oasis" data-story-intro="Enter a calm sanctuary where signature treatments, aromatherapy, and ambient tones renew body and mind.">
+                        <img src="../images/G2.jpg" alt="Spa Treatment Room" loading="lazy"
+                            data-story-title="Wellness Oasis"
+                            data-story-intro="Enter a calm sanctuary where signature treatments, aromatherapy, and ambient tones renew body and mind.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Wellness Oasis</span>
                         </div>
                     </div>
                     <div class="gallery-item tall">
-                        <img src="../images/G3.jpg" alt="Fine Dining Experience" loading="lazy" data-story-title="Culinary Excellence" data-story-intro="From tasting menus to private pairings, each course celebrates local ingredients with world-class presentation.">
+                        <img src="../images/G3.jpg" alt="Fine Dining Experience" loading="lazy"
+                            data-story-title="Culinary Excellence"
+                            data-story-intro="From tasting menus to private pairings, each course celebrates local ingredients with world-class presentation.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Culinary Excellence</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G4.jpg" alt="Hotel Exterior Night" loading="lazy" data-story-title="Iconic Architecture" data-story-intro="As evening lights rise, the Grand Horizon facade becomes a timeless landmark at the heart of the city.">
+                        <img src="../images/G4.jpg" alt="Hotel Exterior Night" loading="lazy"
+                            data-story-title="Iconic Architecture"
+                            data-story-intro="As evening lights rise, the Grand Horizon facade becomes a timeless landmark at the heart of the city.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Iconic Architecture</span>
                         </div>
                     </div>
                     <div class="gallery-item wide">
-                        <img src="../images/G5.jpg" alt="Poolside Relaxation" loading="lazy" data-story-title="Serene Moments" data-story-intro="Unwind poolside with curated service, soft lounge music, and uninterrupted moments of resort-style tranquility.">
+                        <img src="../images/G5.jpg" alt="Poolside Relaxation" loading="lazy"
+                            data-story-title="Serene Moments"
+                            data-story-intro="Unwind poolside with curated service, soft lounge music, and uninterrupted moments of resort-style tranquility.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>Serene Moments</span>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/G6.png" alt="Grand Lobby Area" loading="lazy" data-story-title="The Grand Entrance" data-story-intro="Step into a dramatic welcome space where elegant lighting and concierge hospitality set the tone for your stay.">
+                        <img src="../images/G6.png" alt="Grand Lobby Area" loading="lazy"
+                            data-story-title="The Grand Entrance"
+                            data-story-intro="Step into a dramatic welcome space where elegant lighting and concierge hospitality set the tone for your stay.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
                             <span>The Grand Entrance</span>
@@ -253,7 +277,8 @@
                     <div class="feature-content">
                         <h3>Serenity Spa</h3>
                         <p>Holistic Treatments & Massage</p>
-                        <a href="spa.html?view=serenity" class="btn-text explore-btn">View Treatments <i class="fas fa-arrow-right"></i></a>
+                        <a href="spa.html?view=serenity" class="btn-text explore-btn">View Treatments <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="feature-card">
@@ -261,7 +286,8 @@
                     <div class="feature-content">
                         <h3>Wellness Center</h3>
                         <p>Fitness & Yoga</p>
-                        <a href="spa.html?view=wellness" class="btn-text explore-btn">View Facilities <i class="fas fa-arrow-right"></i></a>
+                        <a href="spa.html?view=wellness" class="btn-text explore-btn">View Facilities <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -279,15 +305,18 @@
                     <div class="feature-content">
                         <h3>Honeymoon Bliss</h3>
                         <p>Romantic Getaway Package</p>
-                        <a href="offers.html?view=honeymoon" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                        <a href="offers.html?view=honeymoon" class="btn-text explore-btn">View Details <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-image" style="background-image: url('../images/long-stay-package_920x638.jpg');"></div>
+                    <div class="feature-image"
+                        style="background-image: url('../images/long-stay-package_920x638.jpg');"></div>
                     <div class="feature-content">
                         <h3>Stay Longer, Save More</h3>
                         <p>Extended Stay Discount</p>
-                        <a href="offers.html?view=staylonger" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                        <a href="offers.html?view=staylonger" class="btn-text explore-btn">View Details <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="feature-card">
@@ -295,7 +324,8 @@
                     <div class="feature-content">
                         <h3>Weekend City Escape</h3>
                         <p>Short Break Specials</p>
-                        <a href="offers.html?view=weekend" class="btn-text explore-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                        <a href="offers.html?view=weekend" class="btn-text explore-btn">View Details <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -322,8 +352,10 @@
             <div class="location-container">
                 <div class="trip-planner">
                     <div class="trip-search-row">
-                        <input id="locationSearchInput" type="text" placeholder="Enter your current location (e.g., Osu, Accra)">
-                        <button id="locationSearchBtn" class="btn-secondary" type="button"><i class="fas fa-search-location"></i> Find Route</button>
+                        <input id="locationSearchInput" type="text"
+                            placeholder="Enter your current location (e.g., Osu, Accra)">
+                        <button id="locationSearchBtn" class="btn-secondary" type="button"><i
+                                class="fas fa-search-location"></i> Find Route</button>
                     </div>
                     <div class="ride-options" id="rideOptions">
                         <button type="button" class="ride-option active" data-ride="economy">
@@ -339,16 +371,16 @@
                             <span class="ride-meta" id="ridePremiumMeta">ETA 0 min • GHS 0</span>
                         </button>
                     </div>
-                    <button id="bookRideBtn" class="btn-primary" type="button" style="margin-top: 10px;">
+                    <button id="bookRideBtn" class="btn-primary booking-cta-margin" type="button">
                         <i class="fab fa-whatsapp"></i> Book This Ride
                     </button>
                 </div>
-                <div id="map" style="height: 450px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></div>
+                <div id="map" class="map-container"></div>
                 <div class="map-controls">
                     <button id="trackLocation" class="btn-primary">
                         <i class="fas fa-location-arrow"></i> Show My Real-Time Location
                     </button>
-                    <p id="locationStatus" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);"></p>
+                    <p id="locationStatus" class="location-status"></p>
                 </div>
             </div>
         </div>
@@ -360,9 +392,12 @@
             <div class="footer-columns">
                 <div class="footer-col">
                     <h3>Grand Horizon Suites</h3>
-                    <p><a href="#location" class="footer-location-link"><i class="fas fa-map-marker-alt"></i> Talented-Royals Academy</a></p>
-                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856" target="_blank" rel="noopener">+233 53 210 2856</a></p>
-                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link" href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
+                    <p><a href="#location" class="footer-location-link"><i class="fas fa-map-marker-alt"></i>
+                            Talented-Royals Academy</a></p>
+                    <p><i class="fas fa-phone"></i> <a class="contact-link phone-link" href="https://wa.me/233532102856"
+                            target="_blank" rel="noopener">+233 53 210 2856</a></p>
+                    <p><i class="fas fa-envelope"></i> <a class="contact-link email-link"
+                            href="mailto:humbledove2004@gmail.com">humbledove2004@gmail.com</a></p>
                 </div>
                 <div class="footer-col">
                     <h3>Quick Links</h3>
@@ -376,12 +411,17 @@
                 <div class="footer-col">
                     <h3>Connect With Us</h3>
                     <div class="social-icons">
-                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer" aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
-                        <a href="https://www.instagram.com/Dadaba_ice_age" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.snapchat.com/add/humblerific" target="_blank" rel="noopener noreferrer"
+                            aria-label="Snapchat"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://www.instagram.com/Dadaba_ice_age" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer"
+                            aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                     <div class="newsletter">
-                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <input type="email" id="newsletter-email" placeholder="Your email" required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
                         <button id="newsletter-submit">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -396,7 +436,7 @@
 
     <!-- Auth Modal -->
     <div class="modal" id="authModal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" style="max-width: 400px;">
+        <div class="modal-content auth-modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
             <div class="modal-header">
                 <h3 id="authModalTitle">Guest Login</h3>
                 <button class="modal-close" id="closeAuthModal" aria-label="Close">✕</button>
@@ -404,48 +444,122 @@
             <div id="auth-forms">
                 <!-- Login Form -->
                 <form id="loginForm">
-                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Sign in to access your previous booking details and faster checkout.</p>
-                    <input type="email" name="email" placeholder="Email address" required class="full" 
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                    <input type="password" name="password" placeholder="Password" required class="full">
-                    <button type="submit" class="full">Login</button>
-                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
-                        New guest? <a href="#" id="showRegister" style="color: var(--secondary); font-weight: 600;">Create an account</a>
+                    <p class="modal-subtext">Access your guest profile to manage bookings and preferences.</p>
+                    <div class="auth-input-group">
+                        <input type="email" name="email" placeholder="Email address" required class="full"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" name="password" placeholder="Password" required class="full">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn-auth-submit">Login to Profile</button>
+                    <p class="modal-divider">
+                        New guest? <a href="#" id="showRegister" class="modal-link">Create an account</a>
                     </p>
                 </form>
 
                 <!-- Register Form (Hidden by default) -->
-                <form id="registerForm" style="display: none;">
-                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Create a guest profile for a personalized luxury experience.</p>
-                    <input type="text" name="full_name" placeholder="Full name" required class="full">
-                    <input type="email" name="email" placeholder="Email address" required class="full" 
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                    <input type="password" name="password" placeholder="Password" required class="full">
-                    <button type="submit" class="full">Create Account</button>
-                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
-                        Already have an account? <a href="#" id="showLogin" style="color: var(--secondary); font-weight: 600;">Login here</a>
+                <form id="registerForm" class="form-hidden">
+                    <p class="modal-subtext">Create a guest profile for a personalized luxury experience.</p>
+                    <div class="auth-input-group">
+                        <input type="text" name="full_name" placeholder="Full name" required class="full">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="email" name="email" placeholder="Email address" required class="full"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" name="password" placeholder="Password" required class="full">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn-auth-submit">Create Guest Account</button>
+                    <p class="modal-divider">
+                        Already have an account? <a href="#" id="showLogin" class="modal-link">Login here</a>
                     </p>
                 </form>
             </div>
 
             <!-- Profile View (Visible when logged in) -->
-            <div id="profile-view" style="display: none;">
-                <div class="profile-header" style="text-align: center; margin-bottom: 20px;">
-                    <div class="user-avatar" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;">
-                        <i class="fas fa-user-circle"></i>
+            <div id="profile-view" class="form-hidden" style="height: 100%;">
+                <div class="guest-dashboard-modal">
+                    <!-- Sidebar -->
+                    <div class="guest-sidebar">
+                        <div class="profile-brief">
+                            <div class="avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h4 id="user-display-name">Guest Name</h4>
+                            <p id="user-display-email">email@example.com</p>
+                        </div>
+                        <nav class="guest-nav">
+                            <button class="guest-nav-btn active"><i class="fas fa-th-large"></i> Dashboard</button>
+                            <button class="guest-nav-btn" onclick="window.GH.scrollTo('rooms'); window.GH.closeModal(document.getElementById('authModal'));"><i class="fas fa-bed"></i> Book a Room</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='dining.html'"><i class="fas fa-utensils"></i> Dining</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='spa.html'"><i class="fas fa-spa"></i> Wellness</button>
+                        </nav>
+                        <button id="logoutBtn" class="btn-secondary full logout-btn-full" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Logout</button>
                     </div>
-                    <h4 id="user-display-name">Guest Name</h4>
-                    <p id="user-display-email" style="color: var(--gray); font-size: 0.9rem;">email@example.com</p>
-                </div>
-                
-                <div class="profile-section">
-                    <h5 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Booking History</h5>
-                    <div id="booking-history-list" style="max-height: 200px; overflow-y: auto; font-size: 0.85rem;">
-                        <p style="color: #999; text-align: center; padding: 10px;">No previous bookings found.</p>
-                    </div>
-                </div>
 
-                <button id="logoutBtn" class="btn-secondary full" style="margin-top: 20px;">Logout</button>
+                    <!-- Main Content -->
+                    <div class="guest-content">
+                        <div class="guest-welcome-header">
+                            <h2 id="guestGreeting">Good Day, Guest</h2>
+                            <p>Welcome back to your coastal sanctuary.</p>
+                        </div>
+
+                        <div class="guest-stats-grid">
+                            <div class="guest-stat-card">
+                                <div class="label">Total Stays</div>
+                                <div class="value" id="statTotalStays">0</div>
+                            </div>
+                            <div class="guest-stat-card">
+                                <div class="label">Loyalty Tier</div>
+                                <div class="value">Elite</div>
+                                <div class="tier-badge">Gold Member</div>
+                            </div>
+                            <div class="guest-stat-card">
+                                <div class="label">Rewards Points</div>
+                                <div class="value">1,250</div>
+                            </div>
+                        </div>
+
+                        <h3 class="guest-section-title">Quick Concierge Actions</h3>
+                        <div class="guest-quick-actions">
+                            <div class="action-card" onclick="window.GH.openBookingWithContext('Special Concierge Request')">
+                                <i class="fas fa-concierge-bell"></i>
+                                <h5>Concierge</h5>
+                            </div>
+                            <div class="action-card" onclick="window.location.href='dining.html'">
+                                <i class="fas fa-wine-glass-alt"></i>
+                                <h5>Reserve Table</h5>
+                            </div>
+                            <div class="action-card" onclick="window.location.href='spa.html'">
+                                <i class="fas fa-hot-stone"></i>
+                                <h5>Spa Ritual</h5>
+                            </div>
+                            <div class="action-card" onclick="window.GH.scrollTo('contact'); window.GH.closeModal(document.getElementById('authModal'));">
+                                <i class="fas fa-envelope-open-text"></i>
+                                <h5>Inquiry</h5>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <h3 class="guest-section-title">Upcoming & Recent Stays</h3>
+                            <div id="booking-history-list" class="booking-history-list">
+                                <div class="booking-history-empty">
+                                    <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                    No upcoming stays scheduled.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -458,29 +572,59 @@
                 <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
             </div>
             <form id="bookingForm">
-                <input name="name" placeholder="Full name" required>
-                <input name="email" type="email" placeholder="Email address" required 
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                <input name="phone" id="phoneInput" type="tel" placeholder="Phone" class="full">
-                <input name="checkin" type="date" placeholder="Check-in">
-                <input name="checkout" type="date" placeholder="Check-out">
-                <select name="guests">
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4+">4+ Guests</option>
-                </select>
-                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
-                <div class="payment-options" style="grid-column: 1 / -1; margin-top: 10px; display: flex; gap: 15px; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                    <label style="font-weight: 600; color: var(--primary);"><i class="fas fa-credit-card"></i> Payment:</label>
-                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                        <input type="radio" name="payment_method" value="request" checked> Reserve Only
+                <div class="booking-input-wrapper">
+                    <input name="name" placeholder="Full name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="email" id="bookingEmail" type="email" placeholder="Email address" required 
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="phone" id="phoneInput" type="tel" placeholder="Phone">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="checkin" type="date" placeholder="Check-in">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="checkout" type="date" placeholder="Check-out">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <select name="guests">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4+">4+ Guests</option>
+                    </select>
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <textarea name="message" rows="1" placeholder="Special Requests" style="padding-top: 12px;"></textarea>
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                
+                <div class="payment-options">
+                    <label class="payment-card selected">
+                        <input type="radio" name="payment_method" value="request" checked>
+                        <i class="fas fa-concierge-bell"></i>
+                        <span class="card-title">Reserve Only</span>
+                        <span class="card-desc">Pay upon arrival at the hotel</span>
                     </label>
-                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                        <input type="radio" name="payment_method" value="stripe"> Pay Now (Secure)
+                    <label class="payment-card">
+                        <input type="radio" name="payment_method" value="stripe">
+                        <i class="fas fa-credit-card"></i>
+                        <span class="card-title">Pay Now</span>
+                        <span class="card-desc">Secure checkout via Stripe</span>
                     </label>
                 </div>
-                <button type="submit" id="bookingSubmitBtn">Request Booking</button>
+
+                <button type="submit" id="bookingSubmitBtn">
+                    Confirm Reservation <i class="fas fa-arrow-right"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -496,18 +640,16 @@
                 <div class="room-modal-grid">
                     <div class="room-carousel">
                         <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous image">‹</button>
-                        <div class="room-modal-image" id="roomImage"
-                            style="background-size:cover;background-position:center;height:320px;border-radius:8px;margin:0 12px;">
-                        </div>
+                        <div class="room-modal-image" id="roomImage"></div>
                         <button class="carousel-nav next" id="carouselNext" aria-label="Next image">›</button>
                         <div class="room-thumbnails" id="roomThumbnails" aria-hidden="false"></div>
                     </div>
                     <div class="room-modal-info">
                         <h4 id="roomTitle"></h4>
-                        <p id="roomPrice" style="font-weight:700;color:var(--secondary);"></p>
+                        <p id="roomPrice"></p>
                         <p id="roomDesc"></p>
-                        <div id="roomAmenities" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"></div>
-                        <div style="margin-top:14px;text-align:right;">
+                        <div id="roomAmenities"></div>
+                        <div class="room-details-button">
                             <button class="btn-primary" id="bookFromDetails">Book This Room</button>
                         </div>
                     </div>
@@ -528,37 +670,40 @@
         <button class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
     </div>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<!-- International Phone Input JS -->
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <!-- International Phone Input JS -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 
-<!-- Payment System (Stripe) -->
-<script src="https://js.stripe.com/v3/"></script>
+    <!-- Payment System (Stripe) -->
+    <script src="https://js.stripe.com/v3/"></script>
 
-<!-- Supabase JS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<!-- Supabase Configuration -->
-<script src="../javascript/supabase-config.js"></script>
+    <!-- Supabase Configuration -->
+    <script src="../javascript/supabase-config.js"></script>
 
-<!-- Contact Service -->
-<script src="../javascript/contact-service.js"></script>
+    <!-- Validation Service -->
+    <script src="../javascript/validation-service.js"></script>
 
-<!-- Modular Scripts -->
-<script src="../javascript/ui-core.js"></script>
-<script src="../javascript/auth.js"></script>
-<script src="../javascript/modals.js"></script>
-<script src="../javascript/gallery.js"></script>
-<script src="../javascript/rooms.js"></script>
-<script src="../javascript/booking.js"></script>
-<script src="../javascript/views.js"></script>
-<script src="../javascript/map.js"></script>
+    <!-- Contact Service -->
+    <script src="../javascript/contact-service.js"></script>
+
+    <!-- Modular Scripts -->
+    <script src="../javascript/ui-core.js"></script>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/modals.js"></script>
+    <script src="../javascript/gallery.js"></script>
+    <script src="../javascript/rooms.js"></script>
+    <script src="../javascript/booking.js"></script>
+    <script src="../javascript/views.js"></script>
+    <script src="../javascript/map.js"></script>
 </body>
 
 </html>

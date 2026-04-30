@@ -221,7 +221,9 @@
                         <a href="https://twitter.com/grandhorizon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                     <div class="newsletter">
-                        <input type="email" id="newsletter-email" placeholder="Your email">
+                        <input type="email" id="newsletter-email" placeholder="Your email" required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
                         <button id="newsletter-submit">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -236,56 +238,130 @@
 
     <!-- Auth Modal -->
     <div class="modal" id="authModal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" style="max-width: 400px;">
+        <div class="modal-content auth-modal-content" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
             <div class="modal-header">
-                <h3 id="authModalTitle">Guest Login</h3>
+                <h3 id="authModalTitle">Guest Portal</h3>
                 <button class="modal-close" id="closeAuthModal" aria-label="Close">✕</button>
             </div>
             <div id="auth-forms">
                 <!-- Login Form -->
                 <form id="loginForm">
-                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Sign in to access your previous booking details and faster checkout.</p>
-                    <input type="email" name="email" placeholder="Email address" required class="full" 
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                    <input type="password" name="password" placeholder="Password" required class="full">
-                    <button type="submit" class="full">Login</button>
-                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
-                        New guest? <a href="#" id="showRegister" style="color: var(--secondary); font-weight: 600;">Create an account</a>
+                    <p class="modal-subtext">Access your guest profile to manage bookings and preferences.</p>
+                    <div class="auth-input-group">
+                        <input type="email" name="email" placeholder="Email address" required class="full"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" name="password" placeholder="Password" required class="full">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn-auth-submit">Login to Profile</button>
+                    <p class="modal-divider">
+                        New guest? <a href="#" id="showRegister" class="modal-link">Create an account</a>
                     </p>
                 </form>
 
                 <!-- Register Form (Hidden by default) -->
-                <form id="registerForm" style="display: none;">
-                    <p style="margin-bottom: 15px; color: var(--gray); font-size: 0.9rem;">Create a guest profile for a personalized luxury experience.</p>
-                    <input type="text" name="full_name" placeholder="Full name" required class="full">
-                    <input type="email" name="email" placeholder="Email address" required class="full" 
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                    <input type="password" name="password" placeholder="Password" required class="full">
-                    <button type="submit" class="full">Create Account</button>
-                    <p style="margin-top: 15px; text-align: center; font-size: 0.9rem;">
-                        Already have an account? <a href="#" id="showLogin" style="color: var(--secondary); font-weight: 600;">Login here</a>
+                <form id="registerForm" class="form-hidden">
+                    <p class="modal-subtext">Create a guest profile for a personalized luxury experience.</p>
+                    <div class="auth-input-group">
+                        <input type="text" name="full_name" placeholder="Full name" required class="full">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="email" name="email" placeholder="Email address" required class="full"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="auth-input-group">
+                        <input type="password" name="password" placeholder="Password" required class="full">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn-auth-submit">Create Guest Account</button>
+                    <p class="modal-divider">
+                        Already have an account? <a href="#" id="showLogin" class="modal-link">Login here</a>
                     </p>
                 </form>
             </div>
 
             <!-- Profile View (Visible when logged in) -->
-            <div id="profile-view" style="display: none;">
-                <div class="profile-header" style="text-align: center; margin-bottom: 20px;">
-                    <div class="user-avatar" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;">
-                        <i class="fas fa-user-circle"></i>
+            <div id="profile-view" class="form-hidden" style="height: 100%;">
+                <div class="guest-dashboard-modal">
+                    <!-- Sidebar -->
+                    <div class="guest-sidebar">
+                        <div class="profile-brief">
+                            <div class="avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h4 id="user-display-name">Guest Name</h4>
+                            <p id="user-display-email">email@example.com</p>
+                        </div>
+                        <nav class="guest-nav">
+                            <button class="guest-nav-btn active"><i class="fas fa-th-large"></i> Dashboard</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='index.html#rooms'"><i class="fas fa-bed"></i> Book a Room</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='dining.html'"><i class="fas fa-utensils"></i> Dining</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='spa.html'"><i class="fas fa-spa"></i> Wellness</button>
+                        </nav>
+                        <button id="logoutBtn" class="btn-secondary full logout-btn-full" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Logout</button>
                     </div>
-                    <h4 id="user-display-name">Guest Name</h4>
-                    <p id="user-display-email" style="color: var(--gray); font-size: 0.9rem;">email@example.com</p>
-                </div>
-                
-                <div class="profile-section">
-                    <h5 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Booking History</h5>
-                    <div id="booking-history-list" style="max-height: 200px; overflow-y: auto; font-size: 0.85rem;">
-                        <p style="color: #999; text-align: center; padding: 10px;">No previous bookings found.</p>
-                    </div>
-                </div>
 
-                <button id="logoutBtn" class="btn-secondary full" style="margin-top: 20px;">Logout</button>
+                    <!-- Main Content -->
+                    <div class="guest-content">
+                        <div class="guest-welcome-header">
+                            <h2 id="guestGreeting">Good Day, Guest</h2>
+                            <p>Welcome back to your coastal sanctuary.</p>
+                        </div>
+
+                        <div class="guest-stats-grid">
+                            <div class="guest-stat-card">
+                                <div class="label">Total Stays</div>
+                                <div class="value" id="statTotalStays">0</div>
+                            </div>
+                            <div class="guest-stat-card">
+                                <div class="label">Loyalty Tier</div>
+                                <div class="value">Elite</div>
+                                <div class="tier-badge">Gold Member</div>
+                            </div>
+                            <div class="guest-stat-card">
+                                <div class="label">Rewards Points</div>
+                                <div class="value">1,250</div>
+                            </div>
+                        </div>
+
+                        <h3 class="guest-section-title">Quick Concierge Actions</h3>
+                        <div class="guest-quick-actions">
+                            <div class="action-card" onclick="window.GH.openBookingWithContext('Special Concierge Request')">
+                                <i class="fas fa-concierge-bell"></i>
+                                <h5>Concierge</h5>
+                            </div>
+                            <div class="action-card" onclick="window.location.href='dining.html'">
+                                <i class="fas fa-wine-glass-alt"></i>
+                                <h5>Reserve Table</h5>
+                            </div>
+                            <div class="action-card" onclick="window.location.href='spa.html'">
+                                <i class="fas fa-hot-stone"></i>
+                                <h5>Spa Ritual</h5>
+                            </div>
+                            <div class="action-card" onclick="window.location.href='index.html#contact'">
+                                <i class="fas fa-envelope-open-text"></i>
+                                <h5>Inquiry</h5>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <h3 class="guest-section-title">Upcoming & Recent Stays</h3>
+                            <div id="booking-history-list" class="booking-history-list">
+                                <div class="booking-history-empty">
+                                    <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                    No upcoming stays scheduled.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -298,29 +374,59 @@
                 <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
             </div>
             <form id="bookingForm">
-                <input name="name" placeholder="Full name" required>
-                <input name="email" type="email" placeholder="Email address" required 
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
-                <input name="phone" id="phoneInput" type="tel" placeholder="Phone" class="full">
-                <input name="checkin" type="date" placeholder="Check-in">
-                <input name="checkout" type="date" placeholder="Check-out">
-                <select name="guests">
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4+">4+ Guests</option>
-                </select>
-                <textarea name="message" rows="4" placeholder="Message / Requests" class="full"></textarea>
-                <div class="payment-options" style="grid-column: 1 / -1; margin-top: 10px; display: flex; gap: 15px; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                    <label style="font-weight: 600; color: var(--primary);"><i class="fas fa-credit-card"></i> Payment:</label>
-                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                        <input type="radio" name="payment_method" value="request" checked> Reserve Only
+                <div class="booking-input-wrapper">
+                    <input name="name" placeholder="Full name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="email" id="bookingEmail" type="email" placeholder="Email address" required 
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="phone" id="phoneInput" type="tel" placeholder="Phone">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="checkin" type="date" placeholder="Check-in">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <input name="checkout" type="date" placeholder="Check-out">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <select name="guests">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4+">4+ Guests</option>
+                    </select>
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="booking-input-wrapper">
+                    <textarea name="message" rows="1" placeholder="Special Requests" style="padding-top: 12px;"></textarea>
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                
+                <div class="payment-options">
+                    <label class="payment-card selected">
+                        <input type="radio" name="payment_method" value="request" checked>
+                        <i class="fas fa-concierge-bell"></i>
+                        <span class="card-title">Reserve Only</span>
+                        <span class="card-desc">Pay upon arrival at the hotel</span>
                     </label>
-                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                        <input type="radio" name="payment_method" value="stripe"> Pay Now (Secure)
+                    <label class="payment-card">
+                        <input type="radio" name="payment_method" value="stripe">
+                        <i class="fas fa-credit-card"></i>
+                        <span class="card-title">Pay Now</span>
+                        <span class="card-desc">Secure checkout via Stripe</span>
                     </label>
                 </div>
-                <button type="submit" id="bookingSubmitBtn">Request Booking</button>
+
+                <button type="submit" id="bookingSubmitBtn">
+                    Confirm Reservation <i class="fas fa-arrow-right"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -330,7 +436,9 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <script src="../javascript/supabase-config.js"></script>
+    <script src="../javascript/validation-service.js"></script>
     <script src="../javascript/contact-service.js"></script>
     <script src="../javascript/ui-core.js"></script>
     <script src="../javascript/auth.js"></script>

@@ -48,6 +48,22 @@
     }
   };
 
+  // --- Payment Option Selection Logic ---
+  document.querySelectorAll(".payment-card").forEach(card => {
+    card.addEventListener("click", () => {
+      // Remove selected class from all cards in the same form
+      const parent = card.closest(".payment-options");
+      parent.querySelectorAll(".payment-card").forEach(c => c.classList.remove("selected"));
+      
+      // Add selected class to current card
+      card.classList.add("selected");
+      
+      // Ensure the radio input inside is checked
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    });
+  });
+
   // --- Event Listeners for Closing ---
   [bookingModal, roomModal, featureModal, menuModal, authModal].forEach(modal => {
     if (modal) {

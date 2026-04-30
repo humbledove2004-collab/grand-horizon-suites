@@ -165,13 +165,19 @@
         const rideName = rideLabels[rideKey] || 'Economy';
         const rideMeta = activeRideCard?.querySelector('.ride-meta')?.textContent || 'ETA not available';
         const pickupText = locationSearchInput?.value?.trim() || originLabel || 'My current location';
+        const destination = 'Grand Horizon Suites, Accra, Ghana';
+
+        // Bolt ride booking URL
+        const boltUrl = `https://bolt.eu/en-gh/rides/?pickup=${encodeURIComponent(pickupText)}&dropoff=${encodeURIComponent(destination)}`;
+
+        // Fallback message if the user wants a WhatsApp contact option
         const message =
           `Hello Grand Horizon Suites, I would like to book a ${rideName} ride to your hotel.\n` +
           `Pickup: ${pickupText}\n` +
           `Estimate: ${rideMeta}\n` +
           `Distance: ${currentDistanceKm || 0} km`;
-        const whatsappUrl = `https://wa.me/233532102856?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank', 'noopener');
+
+        window.open(boltUrl, '_blank', 'noopener');
       });
     }
 

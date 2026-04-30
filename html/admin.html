@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,243 +10,624 @@
     <style>
         :root {
             --sidebar-width: 260px;
+            --admin-bg: #f8fafc;
+            --admin-card-bg: #ffffff;
+            --admin-text-main: #1e293b;
+            --admin-text-muted: #64748b;
+            --admin-accent: #d4af37;
+            --admin-sidebar-bg: #0a2463;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --sidebar-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
         }
+
         /* Admin sits full-viewport; site-wide body padding is for public pages with navbar */
         body {
-            background: #f4f7f6;
+            background: var(--admin-bg);
             display: flex;
             min-height: 100vh;
             font-family: 'Open Sans', sans-serif;
+            color: var(--admin-text-main);
             padding-top: 0;
+            overflow-x: hidden;
         }
-        
+
         /* Admin Sidebar */
         .admin-sidebar {
             width: var(--sidebar-width);
-            background: var(--primary);
+            background: var(--admin-sidebar-bg);
             color: white;
-            padding: 30px 0;
+            padding: 40px 0;
             display: flex;
             flex-direction: column;
             position: fixed;
             height: 100vh;
+            z-index: 1000;
+            box-shadow: var(--sidebar-shadow);
+            transition: transform 0.3s ease;
         }
-        .admin-sidebar .logo { padding: 0 30px 40px; }
-        .admin-nav { flex: 1; }
+
+        .admin-sidebar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        .admin-sidebar .logo {
+            padding: 0 30px 40px;
+            position: relative;
+        }
+
+        .admin-nav {
+            flex: 1;
+            padding: 0 15px;
+        }
+
         .admin-nav-item {
-            padding: 15px 30px;
+            padding: 12px 20px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: rgba(255,255,255,0.7);
+            gap: 14px;
+            color: rgba(255, 255, 255, 0.65);
             text-decoration: none;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
         }
-        .admin-nav-item.active, .admin-nav-item:hover {
-            background: rgba(255,255,255,0.1);
+
+        .admin-nav-item i {
+            width: 20px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .admin-nav-item.active,
+        .admin-nav-item:hover {
+            background: rgba(255, 255, 255, 0.08);
             color: white;
         }
 
-        /* Mobile staff bar — sidebar is hidden on small screens */
-        .admin-mobile-bar {
-            display: none;
-        }
-        .admin-mobile-bar-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .admin-mobile-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.02em;
-        }
-        .admin-mobile-brand span {
-            display: block;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 0.62rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            opacity: 0.65;
-            margin-top: 2px;
-        }
-        .admin-mobile-logout-btn {
-            flex-shrink: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            transition: background 0.2s ease, border-color 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .admin-mobile-logout-btn:hover {
-            background: rgba(255, 255, 255, 0.14);
-            border-color: rgba(255, 255, 255, 0.35);
-        }
-        @media (max-width: 380px) {
-            .admin-mobile-logout-text {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border: 0;
-            }
-        }
-        .admin-mobile-nav {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 10px 12px 14px;
-            scroll-padding-inline: 12px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
-        }
-        .admin-mobile-nav::-webkit-scrollbar {
-            height: 5px;
-        }
-        .admin-mobile-nav::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.28);
-            border-radius: 6px;
-        }
-        .admin-mobile-nav-item {
-            flex: 0 0 auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.55rem 0.95rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            white-space: nowrap;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.78);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .admin-mobile-nav-item i {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        .admin-mobile-nav-item:hover {
-            color: #fff;
+        .admin-nav-item.active {
             background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.18);
+            color: white;
+            box-shadow: inset 4px 0 0 var(--admin-accent);
         }
-        .admin-mobile-nav-item.active {
-            color: var(--primary);
-            background: #fff;
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+
+        .admin-nav-item:hover i {
+            transform: translateX(3px);
+            color: var(--admin-accent);
         }
 
         /* Main Content */
         .admin-main {
             margin-left: var(--sidebar-width);
             flex: 1;
-            padding: 40px;
+            padding: 40px 60px;
+            background: var(--admin-bg);
+            min-height: 100vh;
         }
+
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
+
+        .admin-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
         /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
             margin-bottom: 40px;
         }
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .stat-card h4 { color: var(--gray); font-size: 0.9rem; margin-bottom: 10px; }
-        .stat-card .value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
 
-        /* Bookings Table */
-        .admin-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 25px;
+        .stat-card {
+            background: var(--admin-card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .admin-section { display: none; }
-        .admin-section.active { display: block; }
-        .admin-section-title {
-            margin-bottom: 14px;
-            color: var(--primary);
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
         }
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
-            margin-top: 12px;
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            opacity: 0.03;
+            border-radius: 50%;
         }
-        .settings-field label {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-bottom: 6px;
+
+        .stat-card h4 {
+            color: var(--admin-text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 600;
         }
+
+        .stat-card .value-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-card .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-card .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(10, 36, 99, 0.05);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Admin Cards */
+        .admin-card {
+            background: var(--admin-card-bg);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: 35px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .admin-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-section-title {
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        /* Tables */
+        .table-container {
+            margin-top: 25px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 18px 24px;
+            color: var(--admin-text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        td {
+            padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.95rem;
+            color: var(--admin-text-main);
+            transition: background 0.2s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #fcfcfd;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending { background: #fff7ed; color: #9a3412; }
+        .status-confirmed { background: #f0fdf4; color: #166534; }
+        .status-rejected { background: #fef2f2; color: #991b1b; }
+
+        /* Buttons & Controls */
+        .btn-refresh {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--admin-text-main);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .btn-refresh:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: var(--admin-text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Adjustments */
+        .admin-mobile-bar {
+            display: none;
+            background: var(--admin-sidebar-bg);
+            padding: 15px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .admin-mobile-nav {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .admin-mobile-nav::-webkit-scrollbar { display: none; }
+
+        .admin-mobile-nav-item {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .admin-mobile-nav-item.active {
+            background: var(--admin-accent);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .admin-sidebar { transform: translateX(-100%); }
+            .admin-main { margin-left: 0; padding: 30px 20px; }
+            .admin-mobile-bar { display: block; }
+            .admin-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        }
+
+        /* Keep existing Modal styles but refine them */
+        #replyModal {
+            background: rgba(10, 36, 99, 0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        #replyModal .modal-content {
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px -12px rgba(10, 36, 99, 0.25);
+        }
+
+        /* Settings Styles */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .settings-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .settings-field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--admin-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .settings-field input,
         .settings-field select {
-            width: 100%;
-            border: 1px solid #dde1e6;
-            border-radius: 8px;
-            padding: 10px 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
             font-family: inherit;
             font-size: 0.95rem;
+            color: var(--admin-text-main);
+            transition: all 0.2s ease;
         }
-        #settingsStatus {
-            margin-top: 12px;
-            color: #2e7d32;
-            font-size: 0.9rem;
-            min-height: 1.2rem;
+
+        .settings-field input:focus,
+        .settings-field select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(10, 36, 99, 0.05);
         }
-        .admin-empty-state {
-            padding: 28px;
-            text-align: center;
-            color: var(--gray);
-        }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; padding: 15px; border-bottom: 2px solid #eee; color: var(--gray); font-weight: 600; }
-        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-        
-        .action-btn {
-            border: none;
-            background: none;
+
+        .settings-field select {
             cursor: pointer;
-            padding: 5px;
-            color: var(--gray);
-            transition: 0.2s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
         }
-        .action-btn:hover { color: var(--primary); }
+
+        .btn-save-settings {
+            margin-top: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(10, 36, 99, 0.2);
+        }
+
+        .btn-save-settings:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -5px rgba(10, 36, 99, 0.3);
+            background: #0d2d7a;
+        }
+
+        .btn-save-settings:active {
+            transform: translateY(0);
+        }
+
+        #settingsStatus {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-success {
+            color: #166534;
+        }
+
+        /* Action Board Styles */
+        .action-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(10, 36, 99, 0.08);
+        }
+
+        .action-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .action-card-guest {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .guest-avatar-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(10, 36, 99, 0.05);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .action-card-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--admin-text-main);
+        }
+
+        .action-card-info p {
+            margin: 2px 0 0;
+            font-size: 0.8rem;
+            color: var(--admin-text-muted);
+        }
+
+        .action-priority {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .priority-high { background: #fef2f2; color: #991b1b; }
+        .priority-medium { background: #fff7ed; color: #9a3412; }
+
+        .action-card-details {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.9rem;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--admin-text-main);
+        }
+
+        .detail-row:last-child { margin-bottom: 0; }
+
+        .detail-row i {
+            width: 16px;
+            color: var(--admin-accent);
+            font-size: 0.85rem;
+        }
+
+        .action-card-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .btn-action {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-action-primary:hover {
+            background: #0d2d7a;
+            transform: scale(1.02);
+        }
+
+        .btn-action-secondary {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--admin-text-main);
+        }
+
+        .btn-action-secondary:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
 
         /* Staff login — luxury hotel style */
         #adminLoginOverlay {
@@ -265,6 +647,7 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+
         #adminLoginOverlay::before {
             content: "";
             position: absolute;
@@ -275,6 +658,7 @@
                 radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.11), transparent 46%),
                 radial-gradient(circle at 0% 100%, rgba(196, 150, 58, 0.07), transparent 42%);
         }
+
         #adminLoginOverlay::after {
             content: "";
             position: absolute;
@@ -283,24 +667,32 @@
             opacity: 0.14;
             background-image:
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent 35%),
-                repeating-linear-gradient(
-                    90deg,
+                repeating-linear-gradient(90deg,
                     rgba(255, 255, 255, 0.04) 0,
                     rgba(255, 255, 255, 0.04) 1px,
                     transparent 1px,
-                    transparent 72px
-                );
+                    transparent 72px);
         }
+
         .admin-login-shell {
             position: relative;
             width: 100%;
             max-width: 440px;
             animation: adminLoginIn 0.55s ease-out both;
         }
+
         @keyframes adminLoginIn {
-            from { opacity: 0; transform: translateY(12px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
+
         .login-box {
             position: relative;
             background: linear-gradient(175deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.91));
@@ -315,6 +707,7 @@
             border: 1px solid rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
         }
+
         .login-box::before {
             content: "";
             position: absolute;
@@ -326,6 +719,7 @@
             border-radius: 0 0 6px 6px;
             background: linear-gradient(90deg, transparent, #f0d891, var(--secondary), #f0d891, transparent);
         }
+
         .admin-login-badge {
             display: inline-flex;
             align-items: center;
@@ -337,11 +731,13 @@
             font-weight: 600;
             margin-bottom: 0.75rem;
         }
+
         .admin-login-badge i {
             color: var(--secondary);
             font-size: 0.85rem;
             letter-spacing: normal;
         }
+
         .admin-login-brand {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.85rem, 4vw, 2.2rem);
@@ -350,11 +746,13 @@
             line-height: 1.2;
             margin: 0 0 0.35rem;
         }
+
         .admin-login-tagline {
             font-size: 0.98rem;
             color: var(--gray);
             margin: 0 0 1.5rem;
         }
+
         #adminLoginForm {
             display: flex;
             flex-direction: column;
@@ -362,6 +760,7 @@
             text-align: left;
             margin-top: 0.25rem;
         }
+
         #adminLoginForm label {
             display: block;
             font-size: 0.72rem;
@@ -371,6 +770,7 @@
             color: var(--gray);
             margin-bottom: -0.35rem;
         }
+
         #adminLoginForm input.full {
             width: 100%;
             padding: 0.85rem 1rem;
@@ -381,17 +781,21 @@
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
             background: #fdfdfd;
         }
+
         #adminLoginForm input.full::placeholder {
             color: #9aa3ab;
         }
+
         #adminLoginForm input.full:hover {
             border-color: #cfd6dc;
         }
+
         #adminLoginForm input.full:focus {
             outline: none;
             border-color: rgba(10, 36, 99, 0.35);
             box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.12);
         }
+
         #adminLoginForm button.full {
             margin-top: 0.35rem;
             width: 100%;
@@ -401,6 +805,7 @@
             letter-spacing: 0.02em;
             box-shadow: 0 8px 18px rgba(212, 175, 55, 0.25);
         }
+
         .admin-login-note {
             margin-top: 1.35rem;
             font-size: 0.8rem;
@@ -408,21 +813,232 @@
             color: var(--gray);
             padding: 0 0.25rem;
         }
+
         .admin-login-note strong {
             color: var(--primary);
             font-weight: 600;
         }
 
         /* Reply Modal */
-        #replyModal .modal-content { max-width: 500px; }
-        
+        #replyModal {
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        #replyModal.open {
+            display: flex;
+        }
+
+        #replyModal .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            max-width: 650px;
+            width: 100%;
+            font-family: 'Playfair Display', serif;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: modalFadeIn 0.4s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        #replyModal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
+        }
+
+        #replyModal h3 {
+            font-size: 2rem;
+            color: #0a2463;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        #replyModal .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 8px;
+            border-radius: 4px;
+            min-width: 32px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #replyModal .modal-close:hover {
+            color: #0a2463;
+            background-color: rgba(10, 38, 99, 0.1);
+        }
+
+        #replyModal #replyDetails {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            border-left: 4px solid #d4af37;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #replyModal label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #0a2463;
+            font-size: 1rem;
+        }
+
+        #replyModal textarea {
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 1rem;
+            width: 100%;
+            resize: vertical;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #replyModal textarea:focus {
+            border-color: #d4af37;
+            outline: none;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3), inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #replyModal .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        #replyModal button {
+            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #replyModal button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        #replyModal button:hover:before {
+            left: 100%;
+        }
+
+        #replyModal .btn-primary {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        #replyModal .btn-primary:hover {
+            background: linear-gradient(135deg, #1b5e20, #0d3e14);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        #replyModal .btn-secondary {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            color: #333;
+            border-color: #ccc;
+        }
+
+        #replyModal .btn-secondary:hover {
+            background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #replyModal button:disabled {
+            opacity: 0.5 !important;
+            pointer-events: none !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+        }
+
+        #replyModal button:disabled:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        #replyModal .btn-secondary:nth-child(2) {
+            border-color: #2e7d32;
+            color: #2e7d32;
+        }
+
+        #replyModal .btn-secondary:nth-child(3) {
+            border-color: #c62828;
+            color: #c62828;
+        }
+
+        #replyModal .btn-secondary:nth-child(4) {
+            border-color: #7b1fa2;
+            color: #7b1fa2;
+        }
+
+        #replyModal .btn-secondary:nth-child(5) {
+            border-color: #f57c00;
+            color: #f57c00;
+        }
+
         @media (max-width: 768px) {
-            .admin-sidebar { display: none; }
+            .admin-sidebar {
+                display: none;
+            }
+
             .admin-main {
                 margin-left: 0;
                 padding: 20px;
                 padding-top: 12px;
             }
+
             .admin-mobile-bar {
                 display: block;
                 position: sticky;
@@ -433,11 +1049,13 @@
                 background: var(--primary);
                 box-shadow: 0 4px 20px rgba(10, 36, 99, 0.25);
             }
+
             .admin-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
+
             .admin-header #staffInfo {
                 text-align: left !important;
                 width: 100%;
@@ -445,27 +1063,34 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Admin Login -->
     <div id="adminLoginOverlay" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
         <div class="admin-login-shell">
             <div class="login-box">
-                <p class="admin-login-badge" id="adminLoginTitle"><i class="fas fa-shield-halved" aria-hidden="true"></i> Staff secure access</p>
+                <p class="admin-login-badge" id="adminLoginTitle"><i class="fas fa-shield-halved"
+                        aria-hidden="true"></i> Staff secure access</p>
                 <h2 class="admin-login-brand">Grand Horizon Suites</h2>
                 <p class="admin-login-tagline">Sign in to manage bookings and guest responses.</p>
                 <form id="adminLoginForm" autocomplete="on">
                     <div>
                         <label for="adminStaffEmail">Work email</label>
-                        <input id="adminStaffEmail" type="email" name="email" placeholder="you@grandhorizon.com" required class="full" autocomplete="username">
+                        <input id="adminStaffEmail" type="email" name="email" placeholder="you@grandhorizon.com"
+                            required class="full" autocomplete="username"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address">
                     </div>
                     <div>
                         <label for="adminStaffPassword">Password</label>
-                        <input id="adminStaffPassword" type="password" name="password" placeholder="Enter your password" required class="full" autocomplete="current-password">
+                        <input id="adminStaffPassword" type="password" name="password" placeholder="Enter your password"
+                            required class="full" autocomplete="current-password">
                     </div>
                     <button type="submit" class="btn-primary full">Access dashboard</button>
                 </form>
-                <p class="admin-login-note"><strong>Authorized personnel only.</strong> Activity on this portal may be monitored for security and service quality.</p>
+                <p class="admin-login-note"><strong>Authorized personnel only.</strong> Activity on this portal may be
+                    monitored for security and service quality.</p>
             </div>
         </div>
     </div>
@@ -477,12 +1102,17 @@
             <p style="font-size: 0.7rem; letter-spacing: 2px; opacity: 0.6;">STAFF PORTAL</p>
         </div>
         <nav class="admin-nav">
-            <a href="#bookings" class="admin-nav-item active" data-admin-section="bookings"><i class="fas fa-calendar-check" aria-hidden="true"></i> Bookings</a>
-            <a href="#guests" class="admin-nav-item" data-admin-section="guests"><i class="fas fa-users" aria-hidden="true"></i> Guests</a>
-            <a href="#newsletter" class="admin-nav-item" data-admin-section="newsletter"><i class="fas fa-envelope" aria-hidden="true"></i> Newsletter</a>
-            <a href="#settings" class="admin-nav-item" data-admin-section="settings"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a>
+            <a href="#bookings" class="admin-nav-item active" data-admin-section="bookings"><i
+                    class="fas fa-calendar-check" aria-hidden="true"></i> Bookings</a>
+            <a href="#guests" class="admin-nav-item" data-admin-section="guests"><i class="fas fa-users"
+                    aria-hidden="true"></i> Guests</a>
+            <a href="#newsletter" class="admin-nav-item" data-admin-section="newsletter"><i class="fas fa-envelope"
+                    aria-hidden="true"></i> Newsletter</a>
+            <a href="#settings" class="admin-nav-item" data-admin-section="settings"><i class="fas fa-cog"
+                    aria-hidden="true"></i> Settings</a>
         </nav>
-        <a href="#" class="admin-nav-item" data-admin-logout style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+        <a href="#" class="admin-nav-item" data-admin-logout
+            style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
             <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
         </a>
     </aside>
@@ -493,51 +1123,86 @@
             <div class="admin-mobile-bar-top">
                 <div class="admin-mobile-brand">Grand Horizon <span>Staff</span></div>
                 <button type="button" class="admin-mobile-logout-btn" data-admin-logout aria-label="Log out">
-                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="admin-mobile-logout-text"> Log out</span>
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="admin-mobile-logout-text"> Log
+                        out</span>
                 </button>
             </div>
             <nav class="admin-mobile-nav" aria-label="Dashboard sections">
-                <a href="#bookings" class="admin-mobile-nav-item active" data-admin-section="bookings"><i class="fas fa-calendar-check" aria-hidden="true"></i> Bookings</a>
-                <a href="#guests" class="admin-mobile-nav-item" data-admin-section="guests"><i class="fas fa-users" aria-hidden="true"></i> Guests</a>
-                <a href="#newsletter" class="admin-mobile-nav-item" data-admin-section="newsletter"><i class="fas fa-envelope" aria-hidden="true"></i> Newsletter</a>
-                <a href="#settings" class="admin-mobile-nav-item" data-admin-section="settings"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a>
+                <a href="#bookings" class="admin-mobile-nav-item active" data-admin-section="bookings"><i
+                        class="fas fa-calendar-check" aria-hidden="true"></i> Bookings</a>
+                <a href="#guests" class="admin-mobile-nav-item" data-admin-section="guests"><i class="fas fa-users"
+                        aria-hidden="true"></i> Guests</a>
+                <a href="#newsletter" class="admin-mobile-nav-item" data-admin-section="newsletter"><i
+                        class="fas fa-envelope" aria-hidden="true"></i> Newsletter</a>
+                <a href="#settings" class="admin-mobile-nav-item" data-admin-section="settings"><i class="fas fa-cog"
+                        aria-hidden="true"></i> Settings</a>
             </nav>
         </div>
         <header class="admin-header">
             <div>
-                <h1>Booking Management</h1>
-                <p style="color: var(--gray);">Overview of all guest requests and inquiries.</p>
+                <h1>Dashboard</h1>
+                <p id="currentDateDisplay" style="color: var(--admin-text-muted); font-size: 0.95rem;"></p>
             </div>
-            <div id="staffInfo" style="text-align: right; display: none;">
-                <span id="staffName" style="font-weight: 600;">Staff Member</span>
-                <p style="font-size: 0.8rem; color: var(--gray);">Senior Concierge</p>
+            <div id="staffInfo" style="display: none; align-items: center; gap: 15px; background: white; padding: 10px 20px; border-radius: 16px; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.02);">
+                <div style="text-align: right;">
+                    <div id="staffName" style="font-weight: 700; color: var(--primary); font-size: 1rem;">Staff Member</div>
+                    <div style="font-size: 0.75rem; color: var(--admin-text-muted); text-transform: uppercase; letter-spacing: 1px;">Senior Concierge</div>
+                </div>
+                <div style="width: 42px; height: 42px; background: var(--primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">
+                    <i class="fas fa-user-tie"></i>
+                </div>
             </div>
         </header>
 
         <div class="stats-grid">
             <div class="stat-card">
                 <h4>Total Bookings</h4>
-                <div class="value" id="statTotal">0</div>
+                <div class="value-container">
+                    <div class="value" id="statTotal">0</div>
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                </div>
             </div>
             <div class="stat-card">
                 <h4>Pending Requests</h4>
-                <div class="value" id="statPending" style="color: #f57c00;">0</div>
+                <div class="value-container">
+                    <div class="value" id="statPending" style="color: #f57c00;">0</div>
+                    <div class="stat-icon" style="background: rgba(245, 124, 0, 0.1); color: #f57c00;"><i
+                            class="fas fa-clock"></i></div>
+                </div>
             </div>
             <div class="stat-card">
                 <h4>Revenue (Paid)</h4>
-                <div class="value" id="statRevenue">$0</div>
+                <div class="value-container">
+                    <div class="value" id="statRevenue">$0</div>
+                    <div class="stat-icon" style="background: rgba(46, 125, 50, 0.1); color: #2e7d32;"><i
+                            class="fas fa-dollar-sign"></i></div>
+                </div>
             </div>
         </div>
 
         <section id="section-bookings" class="admin-section active">
+            <div style="margin-bottom: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: var(--primary); font-size: 1.4rem;">Action Board</h3>
+                    <span id="pendingCountBadge" style="background: #f57c00; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">0 Pending</span>
+                </div>
+                <div class="action-board" id="actionBoardContainer">
+                    <!-- Pending action cards will be injected here -->
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--admin-text-muted);">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 12px;"></i>
+                        <p>Scanning for urgent guest requests...</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="admin-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>Recent Activity</h3>
-                    <button class="btn-secondary" style="padding: 5px 15px; font-size: 0.8rem;" id="refreshBtn">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h3 style="margin: 0;">Recent Activity</h3>
+                    <button class="btn-refresh" id="refreshBtn">
                         <i class="fas fa-sync-alt"></i> Refresh
                     </button>
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-container" style="overflow-x: auto;">
                     <table>
                         <thead>
                             <tr>
@@ -564,8 +1229,9 @@
         <section id="section-guests" class="admin-section">
             <div class="admin-card">
                 <h3 class="admin-section-title">Guests Directory</h3>
-                <p style="color: var(--gray); margin-bottom: 8px;">Recent and returning guests from booking inquiries.</p>
-                <div style="overflow-x: auto;">
+                <p style="color: var(--admin-text-muted); margin-bottom: 20px;">Recent and returning guests from booking
+                    inquiries.</p>
+                <div class="table-container" style="overflow-x: auto;">
                     <table>
                         <thead>
                             <tr>
@@ -576,7 +1242,33 @@
                             </tr>
                         </thead>
                         <tbody id="guestsTableBody">
-                            <tr><td colspan="4" class="admin-empty-state"><i class="fas fa-spinner fa-spin"></i> Loading guests...</td></tr>
+                            <tr>
+                                <td colspan="4" class="admin-empty-state"><i class="fas fa-spinner fa-spin"></i> Loading
+                                    guests...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-newsletter" class="admin-section">
+            <div class="admin-card">
+                <h3 class="admin-section-title">Newsletter Subscribers</h3>
+                <p style="color: var(--admin-text-muted); margin-bottom: 20px;">Manage your hotel's newsletter mailing list.</p>
+                <div class="table-container" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Date Subscribed</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsletterTableBody">
+                            <tr>
+                                <td colspan="3" class="admin-empty-state"><i class="fas fa-spinner fa-spin"></i> Loading subscribers...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -586,29 +1278,32 @@
         <section id="section-settings" class="admin-section">
             <div class="admin-card">
                 <h3 class="admin-section-title">Dashboard Settings</h3>
+                <p style="color: var(--admin-text-muted); margin-bottom: 30px;">Personalize your staff dashboard experience and update your preferences.</p>
                 <form id="dashboardSettingsForm">
                     <div class="settings-grid">
                         <div class="settings-field">
-                            <label for="settingDisplayName">Staff Display Name</label>
+                            <label for="settingDisplayName"><i class="fas fa-id-card" style="margin-right: 6px;"></i> Staff Display Name</label>
                             <input id="settingDisplayName" type="text" placeholder="Staff Member">
                         </div>
                         <div class="settings-field">
-                            <label for="settingAutoRefresh">Auto Refresh Bookings</label>
+                            <label for="settingAutoRefresh"><i class="fas fa-sync" style="margin-right: 6px;"></i> Auto Refresh Bookings</label>
                             <select id="settingAutoRefresh">
-                                <option value="off">Off</option>
+                                <option value="off">Manual Refresh Only</option>
                                 <option value="on">Every 60 seconds</option>
                             </select>
                         </div>
                         <div class="settings-field">
-                            <label for="settingTheme">Dashboard Accent</label>
+                            <label for="settingTheme"><i class="fas fa-palette" style="margin-right: 6px;"></i> Dashboard Accent</label>
                             <select id="settingTheme">
-                                <option value="default">Default Blue</option>
-                                <option value="emerald">Emerald</option>
+                                <option value="default">Luxury Blue (Default)</option>
+                                <option value="emerald">Emerald Garden</option>
                                 <option value="royal">Royal Purple</option>
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn-primary" style="margin-top: 16px;">Save Settings</button>
+                    <button type="submit" class="btn-save-settings">
+                        <i class="fas fa-save"></i> Save Preferences
+                    </button>
                     <p id="settingsStatus"></p>
                 </form>
             </div>
@@ -622,7 +1317,8 @@
                 <h3 id="replyTitle">Respond to Guest</h3>
                 <button class="modal-close" id="closeReplyModal">✕</button>
             </div>
-            <div id="replyDetails" style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; font-size: 0.9rem;">
+            <div id="replyDetails"
+                style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; font-size: 0.9rem;">
                 <!-- Booking details will show here -->
             </div>
             <form id="replyForm">
@@ -630,13 +1326,18 @@
                 <input type="hidden" id="replyGuestEmail">
                 <input type="hidden" id="replyGuestName">
                 <label style="display: block; margin-bottom: 8px; font-weight: 600;">Message to Guest:</label>
-                <textarea id="replyMessage" rows="6" class="full" required placeholder="Type your response here..."></textarea>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px;">
+                <textarea id="replyMessage" rows="6" class="full" required
+                    placeholder="Type your response here..."></textarea>
+                <div class="button-grid">
                     <button type="submit" class="btn-primary" style="grid-column: 1 / -1;">Send Response Only</button>
-                    <button type="button" id="confirmBookingBtn" class="btn-secondary" style="border-color: #2e7d32; color: #2e7d32;"><i class="fas fa-check"></i> Confirm</button>
-                    <button type="button" id="rejectBookingBtn" class="btn-secondary" style="border-color: #c62828; color: #c62828;"><i class="fas fa-times"></i> Reject</button>
-                    <button type="button" id="fullBookingBtn" class="btn-secondary" style="border-color: #7b1fa2; color: #7b1fa2;"><i class="fas fa-hotel"></i> Hotel Full</button>
-                    <button type="button" id="pendingBookingBtn" class="btn-secondary" style="border-color: #f57c00; color: #f57c00;"><i class="fas fa-clock"></i> Set Pending</button>
+                    <button type="button" id="confirmBookingBtn" class="btn-secondary"
+                        style="border-color: #2e7d32; color: #2e7d32;"><i class="fas fa-check"></i> Confirm</button>
+                    <button type="button" id="rejectBookingBtn" class="btn-secondary"
+                        style="border-color: #c62828; color: #c62828;"><i class="fas fa-times"></i> Reject</button>
+                    <button type="button" id="fullBookingBtn" class="btn-secondary"
+                        style="border-color: #7b1fa2; color: #7b1fa2;"><i class="fas fa-hotel"></i> Hotel Full</button>
+                    <button type="button" id="pendingBookingBtn" class="btn-secondary"
+                        style="border-color: #f57c00; color: #f57c00;"><i class="fas fa-clock"></i> Set Pending</button>
                 </div>
             </form>
         </div>
@@ -648,4 +1349,5 @@
     <script src="../javascript/supabase-config.js"></script>
     <script src="../javascript/admin.js"></script>
 </body>
+
 </html>

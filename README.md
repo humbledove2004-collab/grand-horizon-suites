@@ -45,6 +45,24 @@ CREATE POLICY "Staff can update bookings" ON contacts
 
 CREATE POLICY "Staff can delete bookings" ON contacts
   FOR DELETE USING (auth.jwt() ->> 'email' = 'humbledove2004@gmail.com');
+
+-- NEWSLETTER TABLE
+CREATE TABLE subscribers (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS for newsletter
+ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
+
+-- Allow anyone to subscribe (Insert)
+CREATE POLICY "Anyone can subscribe to newsletter" ON subscribers
+  FOR INSERT WITH CHECK (true);
+
+-- Allow staff to manage subscribers
+CREATE POLICY "Staff can manage newsletter" ON subscribers
+  FOR ALL USING (auth.jwt() ->> 'email' = 'humbledove2004@gmail.com');
 ```
 
 ### ⚡ Troubleshooting "Database Outdated" or Missing Column

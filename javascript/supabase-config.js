@@ -2,23 +2,35 @@
 // IMPORTANT: In a production environment, use environment variables or a secure backend
 // to manage your Supabase keys. Never commit real secret keys to public repositories.
 const SUPABASE_URL = "https://zfjyqvdwsbzarobyfzsz.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmanlxdmR3c2J6YXJvYnlmenN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMTEwMjMsImV4cCI6MjA4NTg4NzAyM30.Ot1DcL9vRc19KS6C7Egd2NEUkBOOF0AH26rKYpYDoH8";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmanlxdmR3c2J6YXJvYnlmenN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMTEwMjMsImV4cCI6MjA4NTg4NzAyM30.Ot1DcL9vRc19KS6C7Egd2NEUkBOOF0AH26rKYpYDoH8";
 
 // Stripe Configuration (Optional for Payment Links, Required for SDK)
-const STRIPE_PUBLISHABLE_KEY = "pk_test_51T4JdDEubKPeyhMdMwCMwPmcnUmr1XDxbLzuooFhAAcxlWP8hsLuVyCCntzK7F7yWXPanYhHGY00iDpB7UWAjUTC00rUK2XcFi";
-const stripe = typeof Stripe !== 'undefined' ? Stripe(STRIPE_PUBLISHABLE_KEY) : null;
+const STRIPE_PUBLISHABLE_KEY =
+  "pk_test_51T4JdDEubKPeyhMdMwCMwPmcnUmr1XDxbLzuooFhAAcxlWP8hsLuVyCCntzK7F7yWXPanYhHGY00iDpB7UWAjUTC00rUK2XcFi";
+
+// Initialize the global namespace
+window.GH = window.GH || {};
 
 // Initialize official Supabase client from CDN global safely.
-const supabaseBrowserClient =
-  typeof window !== "undefined" &&
-  window.supabase &&
-  typeof window.supabase.createClient === "function"
-    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    : null;
+const initSupabase = () => {
+  if (window.GH.supabase) return window.GH.supabase;
 
-// Expose the initialized client explicitly for all app scripts.
-window.GH = window.GH || {};
-window.GH.supabase = supabaseBrowserClient;
+  if (typeof window !== "undefined" && window.supabase && typeof window.supabase.createClient === "function") {
+    try {
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      window.GH.supabase = client;
+      return client;
+    } catch (e) {
+      console.error("[GH] Critical: Failed to initialize Supabase client", e);
+      return null;
+    }
+  }
+  return null;
+};
+
+// Initial attempt
+initSupabase();
 
 // Initialize custom Supabase client (Backward compatibility)
 const supabaseClient = (() => {
@@ -30,7 +42,9 @@ const supabaseClient = (() => {
     SUPABASE_ANON_KEY.startsWith("ey");
 
   if (!CONFIG_OK) {
-    console.error("Supabase configuration is invalid. Please check your URL and ANON KEY.");
+    console.error(
+      "Supabase configuration is invalid. Please check your URL and ANON KEY.",
+    );
   }
 
   return {
@@ -39,7 +53,9 @@ const supabaseClient = (() => {
 
     async request(method, endpoint, data = null) {
       if (!CONFIG_OK) {
-        throw new Error("Supabase configuration is missing or invalid. Check supabase-config.js.");
+        throw new Error(
+          "Supabase configuration is missing or invalid. Check supabase-config.js.",
+        );
       }
 
       const url = `${this.url}/rest/v1${endpoint}`;
@@ -60,16 +76,21 @@ const supabaseClient = (() => {
         const response = await fetch(url, options);
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.message || `Request failed with status ${response.status}`);
+          throw new Error(
+            errorData.message ||
+              `Request failed with status ${response.status}`,
+          );
         }
         return await response.json();
       } catch (e) {
         console.error(`[Supabase] Request Error (${method} ${endpoint}):`, e);
         // If it's already an Error with a message, keep it. Otherwise, assume a network failure.
-        if (e.message && !e.message.includes('Unexpected token')) {
-           throw e;
+        if (e.message && !e.message.includes("Unexpected token")) {
+          throw e;
         }
-        throw new Error("Network error: Failed to reach Supabase. Check your URL or internet.");
+        throw new Error(
+          "Network error: Failed to reach Supabase. Check your URL or internet.",
+        );
       }
     },
 
@@ -98,7 +119,7 @@ const supabaseClient = (() => {
     // Polling-based subscription (used because full Supabase library is not included)
     subscribeToContacts(callback) {
       if (!CONFIG_OK) return () => {};
-      
+
       const interval = setInterval(async () => {
         try {
           const contacts = await this.getContacts();
@@ -122,9 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
     SUPABASE_ANON_KEY.startsWith("ey");
 
   if (!isConfigValid) {
-    const banner = document.createElement('div');
-    banner.style.cssText = "position:fixed; top:0; left:0; width:100%; background:#ff4d4d; color:white; padding:10px; text-align:center; z-index:9999; font-weight:bold;";
-    banner.innerHTML = "Setup Required: Update Supabase URL and Key in javascript/supabase-config.js";
+    const banner = document.createElement("div");
+    banner.style.cssText =
+      "position:fixed; top:0; left:0; width:100%; background:#ff4d4d; color:white; padding:10px; text-align:center; z-index:9999; font-weight:bold;";
+    banner.innerHTML =
+      "Setup Required: Update Supabase URL and Key in javascript/supabase-config.js";
     document.body.prepend(banner);
   }
   // Select the elements from your footer
@@ -140,11 +163,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const email = newsletterInput.value.trim();
 
-      // Basic email validation
-      if (!email || !email.includes("@")) {
-        window.GH.toast("Please enter a valid email address.", "error", "Invalid Email");
+      // Enhanced email validation using ValidationService
+      const validation = window.GH.validation
+        ? window.GH.validation.validateNewsletter(email)
+        : {
+            valid: email.includes("@"),
+            message: "Please enter a valid email address.",
+          };
+
+      if (!validation.valid) {
+        window.GH.toast(validation.message, "error", "Invalid Email");
         return;
       }
+
+      // Rate limiting check
+      const rateLimit = window.GH.validation
+        ? window.GH.validation.checkRateLimit(email, "newsletter")
+        : { allowed: true };
+      if (!rateLimit.allowed) {
+        window.GH.toast(rateLimit.message, "error", "Rate Limited");
+        return;
+      }
+
+      // Sanitize email
+      const sanitizedEmail = window.GH.validation
+        ? window.GH.validation.sanitizeInput(email)
+        : email;
 
       try {
         // 1. Show Loading State (Spinner)
@@ -153,10 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
         newsletterBtn.disabled = true;
 
         // 2. Database Call
-        await supabaseClient.insertSubscriber({ email: email });
+        await supabaseClient.insertSubscriber({ email: sanitizedEmail });
 
         // 3. Success State
-        window.GH.toast("Success! You've been added to our list.", "success", "Welcome");
+        window.GH.toast(
+          "Success! You've been added to our list.",
+          "success",
+          "Welcome",
+        );
         newsletterInput.value = ""; // Clear the box
         newsletterBtn.innerHTML = originalIcon; // Reset icon
       } catch (err) {
@@ -165,14 +213,34 @@ document.addEventListener("DOMContentLoaded", () => {
         // Detailed error message for the user
         const msg = err.message.toLowerCase();
         if (msg.includes("unique")) {
-          window.GH.toast("This email is already on our list!", "error", "Already Subscribed");
-        } else if (msg.includes("row-level security") || msg.includes("policy")) {
-          window.GH.toast("Database access restricted. Please check your Supabase RLS policies.", "error", "Access Denied");
+          window.GH.toast(
+            "This email is already on our list!",
+            "error",
+            "Already Subscribed",
+          );
+        } else if (
+          msg.includes("row-level security") ||
+          msg.includes("policy")
+        ) {
+          window.GH.toast(
+            "Database access restricted. Please check your Supabase RLS policies.",
+            "error",
+            "Access Denied",
+          );
         } else if (msg.includes("relation") && msg.includes("does not exist")) {
-          window.GH.toast("Database table 'subscribers' missing. Please run the setup SQL from README.md.", "error", "Setup Required");
+          window.GH.toast(
+            "Database table 'subscribers' missing. Please run the setup SQL from README.md.",
+            "error",
+            "Setup Required",
+          );
         } else {
           // Show the actual error message instead of a generic connection error
-          window.GH.toast(err.message || "Something went wrong. Please check your connection.", "error", "Submission Error");
+          window.GH.toast(
+            err.message ||
+              "Something went wrong. Please check your connection.",
+            "error",
+            "Submission Error",
+          );
         }
 
         // Reset icon on error

@@ -1,14 +1,18 @@
 // Grand Horizon Suites - Auth & Guest Profile Logic
 (function() {
   window.GH = window.GH || {};
-  const supabaseClient =
-    window.GH.supabase ||
-    (typeof supabase !== "undefined" &&
-    supabase &&
-    supabase.auth &&
-    typeof supabase.auth.signInWithPassword === "function"
-      ? supabase
-      : null);
+  
+  // Robust client retrieval
+  const getSupabaseClient = () => {
+    if (window.GH.supabase) return window.GH.supabase;
+    if (typeof initSupabase === "function") return initSupabase();
+    if (typeof supabase !== "undefined" && typeof supabase.createClient === "function") {
+      return window.GH.supabase || null; 
+    }
+    return null;
+  };
+
+  const supabaseClient = getSupabaseClient();
 
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
@@ -107,9 +111,17 @@
       submitBtn.textContent = "Logging in...";
 
       try {
-        if (!supabaseClient) throw new Error("Supabase client failed to initialize.");
+        if (!supabaseClient || !supabaseClient.auth) {
+          throw new Error("Guest portal is initializing. Please wait a moment and try again.");
+        }
         const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        
+        if (error) {
+          if (error.message.includes("fetch")) {
+            throw new Error("Connection failed. This may be due to an ad-blocker or a temporary network issue with the database.");
+          }
+          throw error;
+        }
         
         window.GH.toast("Welcome back!", "success", "Logged In");
         window.GH.closeModal(document.getElementById("authModal"));
@@ -136,14 +148,28 @@
   // --- Auth State Management ---
   
   const updateUIForAuth = async (session) => {
+    const authModalContent = document.querySelector("#authModal .modal-content");
     if (session) {
       const user = session.user;
       authForms.style.display = "none";
       profileView.style.display = "block";
-      document.getElementById("authModalTitle").textContent = "Guest Profile";
+      document.getElementById("authModalTitle").textContent = "Guest Portal";
+      if (authModalContent) authModalContent.classList.add("guest-dashboard-modal");
       
+      const firstName = (user.user_metadata.full_name || "Guest").split(" ")[0];
       userDisplayName.textContent = user.user_metadata.full_name || "Guest";
       userDisplayEmail.textContent = user.email;
+
+      // Greeting
+      const greetingEl = document.getElementById("guestGreeting");
+      if (greetingEl) {
+        const hour = new Date().getHours();
+        let greet = "Good Day";
+        if (hour < 12) greet = "Good Morning";
+        else if (hour < 17) greet = "Good Afternoon";
+        else greet = "Good Evening";
+        greetingEl.textContent = `${greet}, ${firstName}`;
+      }
 
       // Update navbar button
       if (openAuthBtn) {
@@ -166,6 +192,7 @@
       authForms.style.display = "block";
       profileView.style.display = "none";
       document.getElementById("authModalTitle").textContent = "Guest Login";
+      if (authModalContent) authModalContent.classList.remove("guest-dashboard-modal");
       
       if (openAuthBtn) {
         openAuthBtn.innerHTML = `<i class="fas fa-user-circle"></i> Guest Profile`;
@@ -182,7 +209,7 @@
 
   const fetchBookingHistory = async (email) => {
     if (!bookingHistoryList) return;
-    bookingHistoryList.innerHTML = '<p style="text-align: center; padding: 10px;"><i class="fas fa-spinner fa-spin"></i> Loading history...</p>';
+    bookingHistoryList.innerHTML = '<p style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Synchronizing your data...</p>';
 
     try {
       if (!supabaseClient) throw new Error("Supabase client failed to initialize.");
@@ -194,24 +221,38 @@
 
       if (error) throw error;
 
+      const statStays = document.getElementById("statTotalStays");
+      if (statStays) statStays.textContent = data ? data.length : 0;
+
       if (data && data.length > 0) {
-        bookingHistoryList.innerHTML = data.map(booking => `
-          <div class="history-item" style="padding: 10px; border-bottom: 1px solid #eee; margin-bottom: 5px;">
-            <div style="display: flex; justify-content: space-between; font-weight: 600;">
-              <span>${booking.message ? booking.message.split(':')[0] : 'General Inquiry'}</span>
-              <span style="color: var(--secondary);">$${booking.payment_method === 'stripe' ? 'Paid' : 'Requested'}</span>
+        bookingHistoryList.innerHTML = data.map(booking => {
+          const type = booking.message ? booking.message.split(':')[0] : 'Inquiry';
+          const isPaid = booking.payment_method === 'stripe';
+          const date = new Date(booking.created_at).toLocaleDateString();
+          
+          return `
+            <div class="booking-card">
+              <div class="booking-card-info">
+                <h4>${type}</h4>
+                <p><i class="far fa-calendar-alt"></i> ${date} • <i class="far fa-user"></i> ${booking.guests} Guests</p>
+              </div>
+              <span class="booking-card-status ${isPaid ? 'status-completed' : 'status-upcoming'}">
+                ${isPaid ? 'Paid' : 'Pending'}
+              </span>
             </div>
-            <div style="color: #666; font-size: 0.8rem; margin-top: 3px;">
-              ${new Date(booking.created_at).toLocaleDateString()} • ${booking.guests} Guests
-            </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       } else {
-        bookingHistoryList.innerHTML = '<p style="color: #999; text-align: center; padding: 10px;">No previous bookings found.</p>';
+        bookingHistoryList.innerHTML = `
+          <div class="booking-history-empty">
+            <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+            No upcoming stays scheduled.
+          </div>
+        `;
       }
     } catch (err) {
       console.error("Error fetching history:", err);
-      bookingHistoryList.innerHTML = '<p style="color: #ff4d4d; text-align: center; padding: 10px;">Could not load history.</p>';
+      bookingHistoryList.innerHTML = '<p style="color: #ff4d4d; text-align: center; padding: 20px;">Could not load history.</p>';
     }
   };
 

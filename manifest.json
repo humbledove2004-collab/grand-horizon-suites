@@ -1,0 +1,19 @@
+{
+  "name": "Grand Horizon Suites",
+  "short_name": "Grand Horizon",
+  "description": "Experience refined luxury and contemporary elegance at Grand Horizon Suites, Accra's premier coastal hotel.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0a2463",
+  "icons": [
+    {
+      "src": "../images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ class ContactService {
   async init() {
     try {
       // Initialize EmailJS with your Public Key
-      if (typeof emailjs !== 'undefined') {
+      if (typeof emailjs !== "undefined") {
         emailjs.init("y9d96UEHknNtrLrDe");
       }
 
@@ -40,15 +40,32 @@ class ContactService {
   // Submit a new contact/booking form
   async submitContact(formData) {
     try {
+      // Enhanced server-side validation
+      const validation = window.GH.validation
+        ? window.GH.validation.validateBookingForm(formData)
+        : { valid: true };
+
+      if (!validation.valid) {
+        throw new Error(validation.errors[0]);
+      }
+
+      // Sanitize all input data
+      const sanitizedData = {};
+      Object.keys(formData).forEach((key) => {
+        sanitizedData[key] = window.GH.validation
+          ? window.GH.validation.sanitizeInput(formData[key])
+          : formData[key];
+      });
+
       const contactData = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || null,
-        check_in: formData.checkin || null,
-        check_out: formData.checkout || null,
-        guests: formData.guests,
-        message: formData.message,
-        payment_method: formData.payment_method || 'request',
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        phone: sanitizedData.phone || null,
+        check_in: sanitizedData.checkin || null,
+        check_out: sanitizedData.checkout || null,
+        guests: sanitizedData.guests,
+        message: sanitizedData.message,
+        payment_method: sanitizedData.payment_method || "request",
         status: "pending",
         created_at: new Date().toISOString(),
         replied: false,
@@ -76,7 +93,7 @@ class ContactService {
       const EMAILJS_CONFIG = {
         serviceID: "service_sa1ub8k",
         templateID: "template_f7bfksd",
-        publicKey: "y9d96UEHknNtrLrDe" // Already initialized in init() but kept for reference
+        publicKey: "y9d96UEHknNtrLrDe", // Already initialized in init() but kept for reference
       };
 
       // Prepare template parameters to match your EmailJS template
@@ -89,16 +106,20 @@ class ContactService {
         check_in: contactData.check_in || "N/A",
         check_out: contactData.check_out || "N/A",
         guests: contactData.guests || "1",
-        reply_to: contactData.email
+        reply_to: contactData.email,
       };
 
       const response = await emailjs.send(
         EMAILJS_CONFIG.serviceID,
         EMAILJS_CONFIG.templateID,
-        templateParams
+        templateParams,
       );
 
-      console.log("[ContactService] Email sent successfully:", response.status, response.text);
+      console.log(
+        "[ContactService] Email sent successfully:",
+        response.status,
+        response.text,
+      );
       return response;
     } catch (error) {
       console.error("[ContactService] Error sending email via EmailJS:", error);
