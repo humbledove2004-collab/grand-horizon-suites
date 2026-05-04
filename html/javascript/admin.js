@@ -15,8 +15,11 @@
 
   const supabaseClient = getSupabaseClient();
   // Initialize EmailJS
+  const EMAILJS_PUBLIC_KEY = "y9d96UEHknNtrLrDe";
+  const EMAILJS_SERVICE_ID = "service_sa1ub8k";
+  const EMAILJS_TEMPLATE_ID = "template_f7bfksd";
   if (typeof emailjs !== "undefined") {
-    emailjs.init("y9d96UEHknNtrLrDe");
+    emailjs.init(EMAILJS_PUBLIC_KEY);
   }
   const adminLoginForm = document.getElementById("adminLoginForm");
   const adminLoginOverlay = document.getElementById("adminLoginOverlay");
@@ -642,18 +645,31 @@
     try {
       // 1. Always send email to guest using EmailJS
       try {
-        await emailjs.send("service_sa1ub8k", "template_f7bfksd", {
+        const templateParams = {
           to_name: name,
           to_email: email,
           from_name: "Grand Horizon Suites Staff",
+          from_email: "humbledove2004@gmail.com",
+          subject: `Booking ${status.charAt(0).toUpperCase() + status.slice(1)} Update - Grand Horizon Suites`,
           message: finalMessage,
           reply_to: "humbledove2004@gmail.com",
-        });
-        console.log(`Email sent successfully for ${status} status`);
+        };
+
+        const emailResponse = await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          templateParams,
+          EMAILJS_PUBLIC_KEY,
+        );
+
+        console.log(
+          `Email sent successfully for ${status} status`,
+          emailResponse,
+        );
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
         alert(
-          "Warning: Email could not be sent, but booking status was updated. Please contact the guest manually.",
+          `Warning: Email could not be sent (${emailError?.text || emailError?.message || emailError}). Please contact the guest manually.`,
         );
         // Continue with database update even if email fails
       }
