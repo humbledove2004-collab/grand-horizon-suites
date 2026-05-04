@@ -210,8 +210,10 @@ h4 {
     padding: 35px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     position: relative;
-    margin: auto; /* Centering trick with flex column */
-    max-height: none; /* Allow full height on mobile if needed, container scrolls */
+    margin: auto;
+    /* Centering trick with flex column */
+    max-height: none;
+    /* Allow full height on mobile if needed, container scrolls */
     display: flex;
     flex-direction: column;
 }
@@ -226,7 +228,7 @@ h4 {
     .modal {
         padding: 10px;
     }
-    
+
     .modal-content {
         padding: 25px 20px;
         margin: 10px auto;
@@ -372,11 +374,11 @@ h4 {
     .modal-content {
         padding: 20px 15px;
     }
-    
+
     .modal h3 {
         font-size: 1.25rem;
     }
-    
+
     .modal-close {
         width: 32px;
         height: 32px;
@@ -403,7 +405,9 @@ h4 {
     grid-column: 1 / -1;
 }
 
-.modal input, .modal select, .modal textarea {
+.modal input,
+.modal select,
+.modal textarea {
     width: 100%;
     padding: 12px 16px;
     border: 1px solid #ddd;
@@ -413,7 +417,9 @@ h4 {
     transition: border-color 0.3s ease;
 }
 
-.modal input:focus, .modal select:focus, .modal textarea:focus {
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
     border-color: var(--secondary);
     outline: none;
 }
@@ -423,7 +429,7 @@ h4 {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    
+
     .modal-header {
         margin-bottom: 20px;
     }
@@ -459,7 +465,7 @@ h4 {
     border-radius: 16px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     margin-bottom: 10px;
 }
 
@@ -530,8 +536,13 @@ h4 {
     background: rgba(0, 0, 0, 0.7);
 }
 
-.carousel-nav.prev { left: 10px; }
-.carousel-nav.next { right: 10px; }
+.carousel-nav.prev {
+    left: 10px;
+}
+
+.carousel-nav.next {
+    right: 10px;
+}
 
 .room-thumbnails {
     display: flex;
@@ -661,7 +672,8 @@ h4 {
     border-radius: 6px
 }
 
-.modal .btn-primary, .modal .btn-secondary {
+.modal .btn-primary,
+.modal .btn-secondary {
     width: 100%;
     padding: 14px;
     font-size: 1rem;
@@ -1848,7 +1860,7 @@ html {
     font-size: 2.8rem;
     margin: 0 auto 15px;
     border: 2px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 2;
 }
@@ -2074,8 +2086,15 @@ html {
 }
 
 @keyframes slideInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .booking-card:hover {
@@ -2084,18 +2103,33 @@ html {
 }
 
 /* Animations for dashboard entry */
-.guest-content > * {
+.guest-content>* {
     animation: fadeInDashboard 0.8s ease-out forwards;
     opacity: 0;
 }
 
-.guest-stats-grid { animation-delay: 0.1s; }
-.guest-quick-actions { animation-delay: 0.2s; }
-.profile-section { animation-delay: 0.3s; }
+.guest-stats-grid {
+    animation-delay: 0.1s;
+}
+
+.guest-quick-actions {
+    animation-delay: 0.2s;
+}
+
+.profile-section {
+    animation-delay: 0.3s;
+}
 
 @keyframes fadeInDashboard {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .booking-card-info h4 {
@@ -2117,14 +2151,22 @@ html {
     text-transform: uppercase;
 }
 
-.status-upcoming { background: #e0f2fe; color: #0369a1; }
-.status-completed { background: #f0fdf4; color: #166534; }
+.status-upcoming {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-completed {
+    background: #f0fdf4;
+    color: #166534;
+}
 
 @media (max-width: 900px) {
     .guest-dashboard-modal {
         flex-direction: column !important;
         height: 95vh;
     }
+
     .guest-sidebar {
         width: 100%;
         padding: 20px;
@@ -2132,15 +2174,19 @@ html {
         align-items: center;
         gap: 20px;
     }
+
     .guest-nav {
-        display: none; /* Hide nav on mobile dashboard for now */
+        display: none;
+        /* Hide nav on mobile dashboard for now */
     }
+
     .guest-sidebar .avatar-large {
         width: 50px;
         height: 50px;
         margin: 0;
         font-size: 1.5rem;
     }
+
     .guest-sidebar .profile-brief {
         text-align: left;
     }
@@ -2176,7 +2222,7 @@ html {
     box-shadow: 0 0 0 4px rgba(10, 36, 99, 0.05);
 }
 
-.auth-input-group input:focus + i {
+.auth-input-group input:focus+i {
     color: var(--primary);
 }
 
@@ -2360,11 +2406,12 @@ html {
 
 /* Specific adjustment for phone input since it has flags on the left */
 .booking-input-wrapper:has(#phoneInput) i {
-    display: none; /* Hide icon for phone as flag is there */
+    display: none;
+    /* Hide icon for phone as flag is there */
 }
 
-.modal form input, 
-.modal form select, 
+.modal form input,
+.modal form select,
 .modal form textarea {
     padding-left: 42px !important;
     background: #f8fafc;
@@ -2396,7 +2443,7 @@ html {
     display: flex !important;
     align-items: center !important;
     gap: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
     transition: all 0.3s ease;
 }
 
@@ -2416,12 +2463,13 @@ html {
 #phoneInput {
     flex: 1;
     min-width: 0;
-    padding-left: 16px !important; /* Standard padding since prefix is outside */
+    padding-left: 16px !important;
+    /* Standard padding since prefix is outside */
     background: white !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 12px !important;
     height: 100%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 #phoneInput:focus {
@@ -2438,8 +2486,8 @@ html {
     width: 300px !important;
 }
 
-.modal form input:focus, 
-.modal form select:focus, 
+.modal form input:focus,
+.modal form select:focus,
 .modal form textarea:focus {
     background: white;
     border-color: var(--primary);
@@ -2447,9 +2495,9 @@ html {
     transform: translateY(-1px);
 }
 
-.modal form input:focus + i,
-.modal form select:focus + i,
-.modal form textarea:focus + i {
+.modal form input:focus+i,
+.modal form select:focus+i,
+.modal form textarea:focus+i {
     color: var(--primary);
     transform: translateY(-50%) scale(1.1);
 }

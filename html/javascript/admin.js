@@ -1,14 +1,17 @@
 // Grand Horizon Suites - Staff Dashboard Logic
 (function () {
   window.GH = window.GH || {};
-  
+
   // Robust client retrieval
   const getSupabaseClient = () => {
     if (window.GH.supabase) return window.GH.supabase;
     if (typeof initSupabase === "function") return initSupabase();
-    if (typeof supabase !== "undefined" && typeof supabase.createClient === "function") {
+    if (
+      typeof supabase !== "undefined" &&
+      typeof supabase.createClient === "function"
+    ) {
       // Last resort fallback
-      return window.GH.supabase || null; 
+      return window.GH.supabase || null;
     }
     return null;
   };
@@ -104,16 +107,18 @@
             "Supabase client is not fully initialized. Please ensure your configuration is correct and you have an internet connection.",
           );
         }
-        
+
         const { data, error } = await supabaseClient.auth.signInWithPassword({
           email,
           password,
         });
-        
+
         if (error) {
           // Check for common connection issues
           if (error.message.includes("fetch")) {
-            throw new Error("Connection failed. This may be due to a slow network, an ad-blocker, or the database being temporarily unreachable.");
+            throw new Error(
+              "Connection failed. This may be due to a slow network, an ad-blocker, or the database being temporarily unreachable.",
+            );
           }
           throw error;
         }
@@ -122,7 +127,10 @@
         adminLoginForm.reset();
       } catch (err) {
         console.error("Admin Login Error:", err);
-        alert("Access Denied: " + (err.message || "An unknown error occurred during authentication."));
+        alert(
+          "Access Denied: " +
+            (err.message || "An unknown error occurred during authentication."),
+        );
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Access Dashboard";
@@ -338,7 +346,8 @@
       applyThemeSetting();
       applyAutoRefreshSetting(settings.autoRefresh);
       settingsStatus.className = "status-success";
-      settingsStatus.innerHTML = '<i class="fas fa-check-circle"></i> Settings saved successfully.';
+      settingsStatus.innerHTML =
+        '<i class="fas fa-check-circle"></i> Settings saved successfully.';
       setTimeout(() => {
         settingsStatus.innerHTML = "";
       }, 3000);
@@ -514,7 +523,11 @@
         if (confirm(`Instantly confirm booking for ${guestName}?`)) {
           btn.disabled = true;
           btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-          await updateBookingStatus(id, "confirmed", `Dear ${guestName}, your booking at Grand Horizon Suites has been instantly confirmed! We look forward to seeing you.`);
+          await updateBookingStatus(
+            id,
+            "confirmed",
+            `Dear ${guestName}, your booking at Grand Horizon Suites has been instantly confirmed! We look forward to seeing you.`,
+          );
         }
       };
     });
