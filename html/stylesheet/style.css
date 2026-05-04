@@ -700,6 +700,8 @@ h4 {
     font-size: 1.5rem;
     color: var(--primary);
     cursor: pointer;
+    position: relative;
+    z-index: 1002;
 }
 
 /* Hero Section */
@@ -2696,6 +2698,7 @@ html {
         flex-direction: column;
         padding: 20px;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
     }
 
     .nav-menu.active {

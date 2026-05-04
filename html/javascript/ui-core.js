@@ -6,8 +6,8 @@
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.querySelector(".nav-menu");
   if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
       hamburger.innerHTML = navMenu.classList.contains("active")
         ? '<i class="fas fa-times"></i>'
         : '<i class="fas fa-bars"></i>';
