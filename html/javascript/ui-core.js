@@ -1,5 +1,5 @@
 // Grand Horizon Suites - UI Core Logic
-(function() {
+(function () {
   window.GH = window.GH || {};
 
   // Mobile Menu Toggle
@@ -8,6 +8,7 @@
   if (hamburger && navMenu) {
     hamburger.addEventListener("click", (e) => {
       e.stopPropagation();
+      navMenu.classList.toggle("active");
       hamburger.innerHTML = navMenu.classList.contains("active")
         ? '<i class="fas fa-times"></i>'
         : '<i class="fas fa-bars"></i>';
@@ -23,9 +24,9 @@
   }
 
   // Scroll visibility (optional helper)
-  window.GH.scrollTo = function(elementId) {
+  window.GH.scrollTo = function (elementId) {
     const el = document.getElementById(elementId);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   // Scroll behavior for navbar
@@ -39,19 +40,19 @@
   });
 
   // --- Luxury Toast System ---
-  window.GH.toast = function(message, type = 'success', title = '') {
-    let container = document.querySelector('.toast-container');
+  window.GH.toast = function (message, type = "success", title = "") {
+    let container = document.querySelector(".toast-container");
     if (!container) {
-      container = document.createElement('div');
-      container.className = 'toast-container';
+      container = document.createElement("div");
+      container.className = "toast-container";
       document.body.appendChild(container);
     }
 
-    const toast = document.createElement('div');
+    const toast = document.createElement("div");
     toast.className = `toast ${type}`;
-    
-    const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
-    const defaultTitle = type === 'error' ? 'Error' : 'Success';
+
+    const icon = type === "error" ? "fa-exclamation-circle" : "fa-check-circle";
+    const defaultTitle = type === "error" ? "Error" : "Success";
 
     toast.innerHTML = `
       <i class="fas ${icon}"></i>
@@ -62,13 +63,13 @@
     `;
 
     container.appendChild(toast);
-    
+
     // Trigger animation
-    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => toast.classList.add("show"), 10);
 
     // Auto remove
     setTimeout(() => {
-      toast.classList.remove('show');
+      toast.classList.remove("show");
       setTimeout(() => toast.remove(), 400);
     }, 4000);
   };
