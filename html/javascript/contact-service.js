@@ -101,6 +101,8 @@ class ContactService {
         to_name: contactData.name,
         to_email: contactData.email,
         from_name: "Grand Horizon Suites",
+        from_email: "humbledove2004@gmail.com",
+        subject: "Booking Confirmation - Grand Horizon Suites",
         message: contactData.message || "No message provided.",
         phone: contactData.phone || "N/A",
         check_in: contactData.check_in || "N/A",
@@ -113,6 +115,7 @@ class ContactService {
         EMAILJS_CONFIG.serviceID,
         EMAILJS_CONFIG.templateID,
         templateParams,
+        EMAILJS_CONFIG.publicKey,
       );
 
       console.log(
@@ -123,6 +126,7 @@ class ContactService {
       return response;
     } catch (error) {
       console.error("[ContactService] Error sending email via EmailJS:", error);
+      throw error;
     }
   }
 
