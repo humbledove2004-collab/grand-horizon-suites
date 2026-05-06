@@ -144,8 +144,7 @@
                 <!-- Room 1 -->
                 <div class="room-card" data-title="Aegean View Suite"
                     data-desc="Private balcony with panoramic sea view, king bed, and jacuzzi." data-price="$499/night"
-                    data-images="images/A1.jpg,images/A2.jpg,images/A3.jpg"
-                    data-amenities="WiFi,Jacuzzi,Sea View">
+                    data-images="images/A1.jpg,images/A2.jpg,images/A3.jpg" data-amenities="WiFi,Jacuzzi,Sea View">
                     <div class="room-image" style="background-image: url('images/A1.jpg');" loading="lazy">
                         <span class="room-price">$499<span>/night</span></span>
                     </div>
@@ -208,8 +207,7 @@
                 <p class="section-subtitle">Experience the Art of Living</p>
                 <div class="gallery-grid">
                     <div class="gallery-item large">
-                        <img src="images/G1.jpg" alt="Luxury Suite View" loading="lazy"
-                            data-story-title="Luxury Living"
+                        <img src="images/G1.jpg" alt="Luxury Suite View" loading="lazy" data-story-title="Luxury Living"
                             data-story-intro="Wake up to panoramic skyline views, premium linens, and handcrafted interiors designed for restful indulgence.">
                         <div class="gallery-overlay">
                             <i class="fas fa-search-plus"></i>
@@ -310,8 +308,8 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-image"
-                        style="background-image: url('images/long-stay-package_920x638.jpg');"></div>
+                    <div class="feature-image" style="background-image: url('images/long-stay-package_920x638.jpg');">
+                    </div>
                     <div class="feature-content">
                         <h3>Stay Longer, Save More</h3>
                         <p>Extended Stay Discount</p>
@@ -499,11 +497,16 @@
                         </div>
                         <nav class="guest-nav">
                             <button class="guest-nav-btn active"><i class="fas fa-th-large"></i> Dashboard</button>
-                            <button class="guest-nav-btn" onclick="window.GH.scrollTo('rooms'); window.GH.closeModal(document.getElementById('authModal'));"><i class="fas fa-bed"></i> Book a Room</button>
-                            <button class="guest-nav-btn" onclick="window.location.href='dining.html'"><i class="fas fa-utensils"></i> Dining</button>
-                            <button class="guest-nav-btn" onclick="window.location.href='spa.html'"><i class="fas fa-spa"></i> Wellness</button>
+                            <button class="guest-nav-btn"
+                                onclick="window.GH.scrollTo('rooms'); window.GH.closeModal(document.getElementById('authModal'));"><i
+                                    class="fas fa-bed"></i> Book a Room</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='dining.html'"><i
+                                    class="fas fa-utensils"></i> Dining</button>
+                            <button class="guest-nav-btn" onclick="window.location.href='spa.html'"><i
+                                    class="fas fa-spa"></i> Wellness</button>
                         </nav>
-                        <button id="logoutBtn" class="btn-secondary full logout-btn-full" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Logout</button>
+                        <button id="logoutBtn" class="btn-secondary full logout-btn-full"
+                            style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Logout</button>
                     </div>
 
                     <!-- Main Content -->
@@ -531,7 +534,8 @@
 
                         <h3 class="guest-section-title">Quick Concierge Actions</h3>
                         <div class="guest-quick-actions">
-                            <div class="action-card" onclick="window.GH.openBookingWithContext('Special Concierge Request')">
+                            <div class="action-card"
+                                onclick="window.GH.openBookingWithContext('Special Concierge Request')">
                                 <i class="fas fa-concierge-bell"></i>
                                 <h5>Concierge</h5>
                             </div>
@@ -543,7 +547,8 @@
                                 <i class="fas fa-hot-stone"></i>
                                 <h5>Spa Ritual</h5>
                             </div>
-                            <div class="action-card" onclick="window.GH.scrollTo('contact'); window.GH.closeModal(document.getElementById('authModal'));">
+                            <div class="action-card"
+                                onclick="window.GH.scrollTo('contact'); window.GH.closeModal(document.getElementById('authModal'));">
                                 <i class="fas fa-envelope-open-text"></i>
                                 <h5>Inquiry</h5>
                             </div>
@@ -553,7 +558,8 @@
                             <h3 class="guest-section-title">Upcoming & Recent Stays</h3>
                             <div id="booking-history-list" class="booking-history-list">
                                 <div class="booking-history-empty">
-                                    <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                    <i class="fas fa-calendar-times"
+                                        style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
                                     No upcoming stays scheduled.
                                 </div>
                             </div>
@@ -571,14 +577,15 @@
                 <h3 id="modalTitle">Book a Room / Contact Us</h3>
                 <button class="modal-close" id="closeBooking" aria-label="Close">✕</button>
             </div>
-            <form id="bookingForm">
+            <form id="bookingForm" novalidate>
                 <div class="booking-input-wrapper">
                     <input name="name" placeholder="Full name" required>
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="booking-input-wrapper">
-                    <input name="email" id="bookingEmail" type="email" placeholder="Email address" required 
-                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address">
+                    <input name="email" id="bookingEmail" type="email" placeholder="Email address" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                        title="Please enter a valid email address">
                     <i class="fas fa-envelope"></i>
                 </div>
                 <div class="booking-input-wrapper">
@@ -603,10 +610,11 @@
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="booking-input-wrapper">
-                    <textarea name="message" rows="1" placeholder="Special Requests" style="padding-top: 12px;"></textarea>
+                    <textarea name="message" rows="1" placeholder="Special Requests"
+                        style="padding-top: 12px;"></textarea>
                     <i class="fas fa-comment-dots"></i>
                 </div>
-                
+
                 <div class="payment-options">
                     <label class="payment-card selected">
                         <input type="radio" name="payment_method" value="request" checked>
