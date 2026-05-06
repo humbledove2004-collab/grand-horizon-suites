@@ -2050,18 +2050,13 @@ html {
 
 .action-card:hover {
     transform: translateY(-8px);
-    background: var(--primary);
-    border-color: var(--primary);
 }
 
 .action-card:hover i {
-    color: var(--secondary);
     transform: scale(1.1);
 }
 
-.action-card:hover h5 {
-    color: white;
-}
+.action-card:hover h5 {}
 
 .action-card h5 {
     margin: 0;
@@ -2779,5 +2774,21 @@ html {
 
     .ride-options {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile adjustments for booking form icons */
+@media (max-width: 480px) {
+    .booking-input-wrapper i {
+        right: 14px;
+        left: auto;
+        font-size: 0.8rem;
+    }
+
+    .modal form input,
+    .modal form select,
+    .modal form textarea {
+        padding-left: 16px !important;
+        padding-right: 42px !important;
     }
 }
